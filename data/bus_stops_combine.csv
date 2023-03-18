@@ -1,10 +1,10 @@
-stop_id,bus_stop,latitude,longtitude,bus_svc
+stop_id,bus_stop,latitude,longitude,bus_svc
 1,Larkin Terminal,1.4964559999542668, 103.74374661113058,P101-loop
 2,Pejabat Daerah Tanah Johor Bahru,1.491850778809332, 103.74087255093272,P101-loop
 3,RTM Jabatan Penyiaran Negeri Johor,1.4801823177394162, 103.7368168221016,P101-loop
 4,Opp Masjid Kolam Ayer,1.4689940555974177, 103.7368740086021,P101-loop
 5,Opp Jabatan Pendidikan Johor,1.4675510557185905, 103.73673088953657,P101-loop
-6,Maktab Sultan Abu Bakar (English College,1.4627466510403129, 103.73965194475493,P101-loop
+6,Maktab Sultan Abu Bakar (English College),1.4627466510403129, 103.73965194475493,P101-loop
 7,Hospital Sultanah Aminah,1.4575742843315376, 103.74670675307506,P101-loop
 8,Johor Islamic Complex,1.456742090233385, 103.74938268472616,P101-loop
 9,Bangunan Sultan Ibrahim,1.4598336266506124, 103.76216068221784,P101-loop
