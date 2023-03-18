@@ -1,5 +1,4 @@
-from queue import Queue
-
+from collections import deque
 import pandas as pd
 
 
@@ -45,7 +44,7 @@ if __name__ == "__main__":
 
     # this code snippet will take in origin stop_id and destination stop_id, and return a queue of BusRoute objects
 
-    routes = Queue()
+    routes = deque()
     # can consider making bus_stops global, abit easier
     bus_stops = pd.read_csv("../data/bus_stops_combine.csv") # get dataframe of all bus stops
 
@@ -57,15 +56,15 @@ if __name__ == "__main__":
     destination_id = 6  # destination_stop_id
     destination_svc = "P101-loop" # to be replaced by stop_id after @huilun helps with the TODO
 
-    # with just id and svc, we can build a BusStop object alr
+    # with just id and svc, we can build a BusStop object alr , but in future only need id after @huilun helps with TODO
     origin_BusStop = BusStop(origin_id, origin_svc,bus_stops)
     dest_BusStop = BusStop(destination_id, destination_svc,bus_stops)
 
     # print(bus_stops.loc[bus_stops["bus_svc"] == "P101-loop"])
 
     # if origin and destination have same bus_svc, shiok, easy alr
-    if origin_svc == destination_svc:
-        routes.put(BusRoute(origin_BusStop, dest_BusStop, 5, 10, 20))
+    if origin_svc == destination_svc: # this check needa replace too after TODO
+        routes.append(BusRoute(origin_BusStop, dest_BusStop, 5, 10, 20))
 
     else: #else search for busses that share the same bus in dest and origin bus stop
         pass
@@ -73,13 +72,13 @@ if __name__ == "__main__":
     #finally , fetch from queue each route one by one
     step = 1
     while routes:
-        route = routes.get()
+        route = routes.popleft()
         # if its a bus route:
         if isinstance(route, BusRoute):
             print(f"Step {step}:\n\tTake {route.origin_BusStop.svc} at {route.origin_BusStop.name} for "
-                  f"{route.num_of_stops_to_dest} stops.\n\tAlight at {route.dest_BusStop.name}.")
+                  f"{route.num_of_stops_to_dest} stops.\n\tAlight at {route.dest_BusStop.name}.\n")
         # else its a walking route
         else:
             pass
         step += 1
-
+    print("Congratulations! You have arrived at your destination!")
