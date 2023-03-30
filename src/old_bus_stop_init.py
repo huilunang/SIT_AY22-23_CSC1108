@@ -18,25 +18,6 @@ class BusRoute(Route):
         self.num_of_stops_to_dest = num_of_stops_to_dest
 
 
-
-class BusStop:
-    def __init__(self, stop_id, bus_stops):
-        self.stop_id = stop_id
-        self.set_services = self.fetch_services(stop_id, bus_stops)
-        self.name, self.coords = self.fetch_name_and_coords(stop_id, bus_stops)
-
-    def fetch_services(self,stop_id, bus_stops):
-        services = bus_stops.loc[(bus_stops["stop_id"] == stop_id), ("bus_svc")].values.flatten()
-        return set(services)
-
-    def fetch_name_and_coords(self, stop_id, bus_stops):
-        # fetch the bus stop details where the stop_id and svc matches each other
-        result = bus_stops.loc[(bus_stops["stop_id"] == stop_id), ("bus_stop", "longitude", "latitude")].values.flatten()
-        name = result[0]
-        coords = result[1:3]
-        return name, coords
-
-
 if __name__ == "__main__":
 
     # this code snippet will take in origin stop_id and destination stop_id, and return a queue of BusRoute objects
