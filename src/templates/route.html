@@ -23,34 +23,51 @@
         border-radius: 15px
       }
       #inputs {
-        display: inline-block;
-        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
       }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+
       #submit-btn {
-        margin-top: 5px;
-        width: 100px;
-        height: 30px;
-        background-color: #4285F4;
-        color: #fff;
+        background-color: #4CAF50;
+        color: white;
         border: none;
-        border-radius: 2px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
         cursor: pointer;
-        font-family: 'Roboto','sans-serif';
-        font-size: 12px;
-        text-align: center;
-        line-height: 30px;
+        transition: background-color 0.3s ease;
+      }
+
+      #submit-btn:hover {
+        background-color: #3e8e41;
       }
     </style>
   </head>
   <body>
     <div id="floating-panel">
       <div id="inputs">
-        <label for="origin-input">Origin:</label>
+        <label for="origin-input">Start:</label>
         <input type="text" id="origin-input">
         <br>
         <label for="destination-input">Destination:</label>
         <input type="text" id="destination-input">
       </div>
+        <br>
       <button id="submit-btn">Submit</button>
     </div>
     <div id="map"></div>
