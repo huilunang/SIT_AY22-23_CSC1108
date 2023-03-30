@@ -56,10 +56,10 @@ def decode_polyline(polyline_str):
 
 
 @app.route("/", methods=["GET", "POST"])
-def map():
+def generate_map():
     origin = ""
     destination = ""
-    waypoints= ""
+    waypoints = ""
     api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
 
     if request.method == "POST":
