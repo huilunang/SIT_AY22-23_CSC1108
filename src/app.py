@@ -1,17 +1,10 @@
-from flask import Flask
-from flask import render_template
-import folium
+from flask import Flask, render_template, request
+import requests
+import json
+import gmplot
 
 app = Flask(__name__)
 
-# a simple page that says hello
-@app.route('/')
-def hello():
-    return render_template('index.html')
-
-@app.route("/map2")
-def map():
-    return render_template('route.html')
 
 def decode_polyline(polyline_str):
     """
@@ -54,33 +47,45 @@ def decode_polyline(polyline_str):
 
     return coordinates
 
-#test test
-import requests
-import json
-from gmplot import gmplot
 
-# Define the API key and origin/destination/waypoints
-api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
-origin = 'New York, NY'
-destination = 'Los Angeles, CA'
-waypoints = 'via:Chicago,IL|via:Denver,CO'
+# define the API key and origin/destination/waypoints
+# api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
+# origin = 'Kampung Melayu Kulai'
+# destination = 'Senai Airport Terminal'
+# waypoints = ''
 
-# Make a request to the Google Directions API
-url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
-response = requests.get(url)
-data = json.loads(response.text)
 
-# Extract the polyline points and decode them into latitude/longitude coordinates
-if data['status'] == 'OK' and data['routes']:
-    route = data['routes'][0]['overview_polyline']['points']
-    coords = decode_polyline(route)
-else:
-    print('Error: no routes found')
+@app.route("/", methods=["GET", "POST"])
+def map():
+    origin = ""
+    destination = ""
+    waypoints= ""
+    api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
 
-# Plot the coordinates on a map using gmplot
-gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey="AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI")
-gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
-gmap.draw('src/templates/route.html')
+    if request.method == "POST":
+        origin = request.form.get("origin")
+        destination = request.form.get("destination")
+
+        # make a request to the Google Directions API
+        url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
+        response = requests.get(url)
+        data = json.loads(response.text)
+
+        # extract the polyline points and decode them into latitude/longitude coordinates
+        if data['status'] == 'OK' and data['routes']:
+            route = data['routes'][0]['overview_polyline']['points']
+            coords = decode_polyline(route)
+
+            # plot the coordinates on a map using gmplot
+            gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key)
+            gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
+
+            # create a div to hold the map and render the template with the div and user inputs
+            map_div = gmap.get_div()
+            return render_template("route.html", map_div=map_div, origin=origin, destination=destination)
+
+    # render the template with the empty form and no map
+    return render_template("route.html", map_div="", origin=origin, destination=destination)
 
 
 if __name__ == "__main__":
