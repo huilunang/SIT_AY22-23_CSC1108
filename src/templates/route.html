@@ -4,10 +4,20 @@
     <title>Map with Route</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    {% if map_script_1 %}
+      {{ map_script_1|safe }}
+    {% endif %}
+    {% if map_script_2 %}
+      {{ map_script_2|safe }}
+    {% endif %}
     <style>
       body {
         margin: 0px;
         padding: 0px;
+      }
+      #map_canvas {
+        height: 1000px;
+        width: 100%;
       }
       #map {
         height: 1000px;
@@ -62,7 +72,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="initialize(); ">
     <div id="floating-panel">
       <form id="inputs" action="/" method="post">
         <label for="origin-input">Start:</label>
@@ -74,18 +84,8 @@
       <button id="submit-btn">Submit</button>
       </form>
     </div>
-    <div id="map">
-        {{ map_div|safe }}
-    </div>
-    <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 1.4927, lng: 103.7414}
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI&callback=initMap"
-    async defer></script>
+      {% if map_div_1 %}
+        {{ map_div_1|safe }}
+      {% endif %}
   </body>
 </html>

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import requests
 import json
 import gmplot
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -81,18 +82,29 @@ def generate_map():
             gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
 
             # create a div to hold the map and render the template with the div and user inputs
-            map_div = gmap.get()
-            print(map_div)
+            map_html = gmap.get()
+            html_finder = BeautifulSoup(map_html, 'html.parser')
+            map_script = html_finder.find_all('script')
 
-            return render_template("route2.html", map_div=map_div, origin=origin, destination=destination)
+            map_script_1 = map_script[0]
+            map_script_2 = map_script[1]
+            map_div_1 = '<div id="map_canvas"></div>'
 
-    # render the template with the empty form and no map
-    return render_template("route.html", map_div="", origin=origin, destination=destination)
+            return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
+                                   map_script_2=map_script_2, origin=origin, destination=destination)
 
+    # render the template with the empty form
+    gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key)
+    map_html = gmap.get()
+    html_finder = BeautifulSoup(map_html, 'html.parser')
+    map_script = html_finder.find_all('script')
 
-@app.route("/route2")
-def route2():
-    return render_template('route2.html')
+    map_script_1 = map_script[0]
+    map_script_2 = map_script[1]
+    map_div_1 = '<div id="map_canvas"></div>'
+
+    return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
+                           map_script_2=map_script_2, origin=origin, destination=destination)
 
 
 if __name__ == "__main__":
