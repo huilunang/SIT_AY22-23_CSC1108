@@ -49,17 +49,14 @@ def decode_polyline(polyline_str):
     return coordinates
 
 
-# define the API key and origin/destination/waypoints
 # api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
-# origin = 'Kampung Melayu Kulai'
-# destination = 'Senai Airport Terminal'
-# waypoints = ''
 
 
 @app.route("/", methods=["GET", "POST"])
 def generate_map():
     origin = ""
     destination = ""
+    # TODO: parse waypoints from algorithm HERE
     waypoints = ""
     api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
 
@@ -76,7 +73,6 @@ def generate_map():
         if data['status'] == 'OK' and data['routes']:
             route = data['routes'][0]['overview_polyline']['points']
             coords = decode_polyline(route)
-            print(coords)
 
             # plot the coordinates on a map using gmplot
             gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key)
@@ -92,6 +88,8 @@ def generate_map():
             map_script_1 = map_script[0]
             map_script_2 = map_script[1]
             map_div_1 = '<div id="map_canvas"></div>'
+
+            # TODO: add travel instructions from algorithm HERE
 
             return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
                                    map_script_2=map_script_2, origin=origin, destination=destination)
