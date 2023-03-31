@@ -32,5 +32,57 @@ def index():
     # render the map using a template
     return render_template('map.html', map=map_html)
 
+<<<<<<< Updated upstream
 if __name__ == '__main__':
     app.run(debug=True)
+=======
+# define the API key and origin/destination/waypoints
+# api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
+# origin = 'Kampung Melayu Kulai'
+# destination = 'Senai Airport Terminal'
+# waypoints = ''
+
+
+@app.route("/", methods=["GET", "POST"])
+def generate_map():
+    origin = ""
+    destination = ""
+    waypoints = ""
+    api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
+
+    if request.method == "POST":
+        origin = request.form.get("origin-input")
+        destination = request.form.get("destination-input")
+
+        # make a request to the Google Directions API
+        url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
+        response = requests.get(url)
+        data = json.loads(response.text)
+
+        # extract the polyline points and decode them into latitude/longitude coordinates
+        if data['status'] == 'OK' and data['routes']:
+            route = data['routes'][0]['overview_polyline']['points']
+            coords = decode_polyline(route)
+
+            # plot the coordinates on a map using gmplot
+            gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key)
+            gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
+
+            # create a div to hold the map and render the template with the div and user inputs
+            # map_div = gmap.draw("templates/route2.html")
+            map_div = gmap.get()
+            print(map_div)
+            return render_template("route2.html", map_div=map_div, origin=origin, destination=destination)
+
+    # render the template with the empty form and no map
+    return render_template("route.html", map_div="", origin=origin, destination=destination)
+
+
+@app.route("/route2")
+def route2():
+    return render_template('route2.html')
+
+
+if __name__ == "__main__":
+    app.run()
+>>>>>>> Stashed changes
