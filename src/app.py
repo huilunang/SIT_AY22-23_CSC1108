@@ -81,10 +81,10 @@ def generate_map():
             gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
 
             # create a div to hold the map and render the template with the div and user inputs
-            # map_div = gmap.draw("templates/route2.html")
-            map_div = gmap.get()
+            map_div = gmap.draw("templates/route2.html")
             print(map_div)
-            return render_template("route2.html", map_div=map_div, origin=origin, destination=destination)
+
+            # return render_template("route2.html", map_div=map_div, origin=origin, destination=destination)
 
     # render the template with the empty form and no map
     return render_template("route.html", map_div="", origin=origin, destination=destination)
