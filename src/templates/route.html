@@ -5,6 +5,10 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
       #map {
         height: 1000px;
         width: 100%;
@@ -60,47 +64,24 @@
   </head>
   <body>
     <div id="floating-panel">
-      <div id="inputs">
+      <form id="inputs" action="/" method="post">
         <label for="origin-input">Start:</label>
-        <input type="text" id="origin-input">
+        <input type="text" id="origin-input" name="origin-input">
         <br>
         <label for="destination-input">Destination:</label>
-        <input type="text" id="destination-input">
-      </div>
+        <input type="text" id="destination-input" name="destination-input">
         <br>
       <button id="submit-btn">Submit</button>
+      </form>
     </div>
-    <div id="map"></div>
+    <div id="map">
+        {{ map_div|safe }}
+    </div>
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 13,
           center: {lat: 1.4927, lng: 103.7414}
-        });
-
-        var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-
-        directionsDisplay.setMap(map);
-
-        var submitBtn = document.getElementById('submit-btn');
-        submitBtn.addEventListener('click', function() {
-          var originInput = document.getElementById('origin-input');
-          var destinationInput = document.getElementById('destination-input');
-          var origin = originInput.value;
-          var destination = destinationInput.value;
-
-          var request = {
-            origin: origin,
-            destination: destination,
-            travelMode: 'DRIVING'
-          };
-
-          directionsService.route(request, function(result, status) {
-            if (status == 'OK') {
-              directionsDisplay.setDirections(result);
-            }
-          });
         });
       }
     </script>

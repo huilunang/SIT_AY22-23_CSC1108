@@ -63,8 +63,8 @@ def generate_map():
     api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
 
     if request.method == "POST":
-        origin = request.form.get("origin")
-        destination = request.form.get("destination")
+        origin = request.form.get("origin-input")
+        destination = request.form.get("destination-input")
 
         # make a request to the Google Directions API
         url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
@@ -81,11 +81,18 @@ def generate_map():
             gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], 'cornflowerblue', edge_width=5)
 
             # create a div to hold the map and render the template with the div and user inputs
-            map_div = gmap.get_div()
-            return render_template("route.html", map_div=map_div, origin=origin, destination=destination)
+            # map_div = gmap.draw("templates/route2.html")
+            map_div = gmap.get()
+            print(map_div)
+            return render_template("route2.html", map_div=map_div, origin=origin, destination=destination)
 
     # render the template with the empty form and no map
     return render_template("route.html", map_div="", origin=origin, destination=destination)
+
+
+@app.route("/route2")
+def route2():
+    return render_template('route2.html')
 
 
 if __name__ == "__main__":
