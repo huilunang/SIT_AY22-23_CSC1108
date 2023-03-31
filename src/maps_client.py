@@ -63,25 +63,53 @@ class Directions(Client):
         directions = self.direction(origin, destination)
         return directions[0]["legs"][0]["distance"]["value"]
 
+
     def get_duration(self, origin, destination):
         directions = self.direction(origin, destination)
         return directions[0]["legs"][0]["duration"]["value"]
+
+
     def get_walking_distance(self, origin, destination):
         directions = self.direction(origin, destination, mode="walking")
         return directions[0]["legs"][0]["distance"]["value"]
+
+
 
     def get_walking_duration(self, origin, destination):
         directions = self.direction(origin, destination, mode="walking")
         return directions[0]["legs"][0]["duration"]["value"]
 
+
+
     def get_cost_duration(self, origin, destination):
         directions = self.direction(origin, destination)
         return directions[0]["legs"][0]["distance"]["value"], directions[0]["legs"][0]["duration"]["value"]
 
-# dm = DistanceMatrix()
-# print(dm.distance("Kampung Melayu Kulai", "Kulai Terminal", mode="transit"))
-# print(dm.distance(["Kampung Melayu Kulai", "Kulai Terminal"],
-#       ["Kulai Terminal", "Pejabat Daerah Tanah Johor Bahru"], mode="transit"))
 
-# d = Directions()
-# print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking"))
+def get_distance_value(directions):
+    return directions[0]["legs"][0]["distance"]["value"]
+
+def get_duration_value(directions):
+    return directions[0]["legs"][0]["duration"]["value"]
+
+def get_walking_distance_from_directions(directions):
+    return directions[0]["legs"][0]["distance"]["value"]
+
+def get_walking_duration(directions):
+    return directions[0]["legs"][0]["duration"]["value"]
+
+def get_polyline_points(directions):
+    return directions[0]['overview_polyline']['points']
+
+
+if __name__ == '__main__':
+
+    # dm = DistanceMatrix()
+    # print(dm.distance("Kampung Melayu Kulai", "Kulai Terminal", mode="transit"))
+    # print(dm.distance(["Kampung Melayu Kulai", "Kulai Terminal"],
+    #       ["Kulai Terminal", "Pejabat Daerah Tanah Johor Bahru"], mode="transit"))
+    d = Directions()
+    # print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking")[0]['routes'][0]['overview_polyline']['points'])
+    legs = d.direction("Kampung Melayu Kulai", "Kulai Terminal")[0]['legs'][0]['steps']
+    for step in legs:
+        print(f"In {step['distance']['text']}, {step['html_instructions']}")

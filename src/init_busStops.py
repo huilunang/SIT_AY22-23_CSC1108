@@ -9,7 +9,8 @@ import pandas as pd
 bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")  # get dataframe of all bus stops
 d = Directions()
 MINIMUM_BUS_STOPS_SAVED = 5
-MAX_WALKING_DURATION = 300 # 5 minutes
+MAX_WALKING_DURATION = 300  # 5 minutes
+
 
 def generate_bus_stops(bus_stops_df):
     bus_stops = {}
@@ -32,7 +33,8 @@ def generate_bus_stops(bus_stops_df):
 def init_neighbors(neighbors, service, stop_no):
     # fetch the bus stop details where the svc matches, and stop_no is +1 or -1 of the current stop_no
     next_stop = stop_no + 1
-    result = bus_stops_df.loc[(bus_stops_df["bus_svc"] == service) & (bus_stops_df["stop_no"] == next_stop), ("stop_id", "bus_svc")].values.flatten()
+    result = bus_stops_df.loc[(bus_stops_df["bus_svc"] == service) & (bus_stops_df["stop_no"] == next_stop), (
+    "stop_id", "bus_svc")].values.flatten()
     if result.any():
         stop_id = result[0]
         service = result[1]
@@ -55,11 +57,14 @@ class BusStop:
     def __eq__(self, other):
         return self.stop_id == other.stop_id
 
+
 class Node:
     def __init__(self, bus_stop, parent):
         self.bus_stop = bus_stop
         self.parent = parent
-        self.cost, self.cost_duration = self.get_cost_duration()
+        self.directions = self.get_directions()
+        self.cost = self.get_cost()
+        self.duration = self.get_duration()
 
     def getCoords(self):
         return self.bus_stop.coords
@@ -70,10 +75,15 @@ class Node:
     def get_parent(self):
         return self.parent
 
-    def get_cost(self):
-        global d
+    def get_directions(self):
         if self.parent:
-            cost = d.get_distance(self.bus_stop.coords, self.parent.bus_stop.coords)
+            return d.direction(self.bus_stop.coords, self.parent.bus_stop.coords)
+        else:
+            return None
+
+    def get_cost(self):
+        if self.parent:
+            cost = get_distance_value(self.directions)
             current_node = self.parent
         else:
             return 0
@@ -82,22 +92,22 @@ class Node:
             current_node = current_node.parent
         return cost
 
-    def get_cost_duration(self):
-        global d
+    def get_duration(self):
         if self.parent:
-            cost, duration = d.get_cost_duration(self.bus_stop.coords, self.parent.bus_stop.coords)
-            cost += self.parent.cost
-            duration += self.parent.cost_duration
-            return cost, duration
+            duration = get_duration_value(self.directions)
+            duration += self.parent.duration
+            return duration
         else:
-            return 0, 0
+            return 0
 
     def get_heuristic(self, goal):
         # Calculate the distance between the node and the goal using Haversine
-        return geopy.distance.geodesic(self.bus_stop.coords, goal.bus_stop.coords).km
+        # in meters since google directions gives meters
+        return geopy.distance.geodesic(self.bus_stop.coords, goal.bus_stop.coords).m
 
     def get_bus_stop_duration_to(self, origin):
-        return self.cost_duration - origin.cost_duration
+        return self.duration - origin.duration
+
 
 def aStar(start, goal, bus_stops_dict):
     # Initialize the priority queue
@@ -117,9 +127,8 @@ def aStar(start, goal, bus_stops_dict):
         # Get the node with the minimum cost
         node = queue.get()[1]
 
-        #for trouble shooting in algo, uncomment below
+        # for trouble shooting in algo, uncomment below
         # printPath(get_path(node))
-
 
         # If the node is the goal, return it
         if node.bus_stop == goal_node.bus_stop:
@@ -158,6 +167,7 @@ def get_path(node):
     # Return the path
     return path
 
+
 def optimize_path(path):
     optimized_path = path
     found_better_path = True
@@ -167,12 +177,14 @@ def optimize_path(path):
             if found_better_path:
                 break
             for j in range(len(optimized_path) - 1, i + MINIMUM_BUS_STOPS_SAVED, -1):
-                walking_duration = d.get_walking_duration(optimized_path[i].bus_stop.coords, optimized_path[j].bus_stop.coords)
-                if (walking_duration <= MAX_WALKING_DURATION): # if required to walk more than 5 minutes, then no point in optimizing
+                walking_duration = d.get_walking_duration(optimized_path[i].bus_stop.coords,
+                                                          optimized_path[j].bus_stop.coords)
+                if (walking_duration <= MAX_WALKING_DURATION):  # if required to walk more than 5 minutes, then no point in optimizing
                     bus_duration = optimized_path[j].get_bus_stop_duration_to(optimized_path[i])
                     if walking_duration < bus_duration:
                         found_better_path = True
                         optimized_path = optimized_path[:i] + optimized_path[j:]
+
 
                         # for trouble shooting in algo, uncomment below
                         # print(i, j)
@@ -182,9 +194,8 @@ def optimize_path(path):
                         # printPath(path)
                         break
 
-
-
     return optimized_path
+
 
 def printPath(path):
     busses = []
@@ -214,21 +225,26 @@ def printPath(path):
     print("Bus Path: ")
     for bus in bus_path:
         for i, j in bus_path[bus].items():
-            print(f"Step {bus} : From {path[current_bus_stop].bus_stop.name}, take bus service {i} for {j} stops, alight at {path[current_bus_stop + j].bus_stop.name}")
+            print(
+                f"Step {bus} : From {path[current_bus_stop].bus_stop.name}, take bus service {i} for {j} stops, alight at {path[current_bus_stop + j].bus_stop.name}")
             current_bus_stop += j
 
-
     # print each stop_id in path for debugging, uncomment below
-    stop_ids = [node.bus_stop.stop_id for node in path]
+    stop_ids = [node.bus_stop.coords for node in path]
     print("Path: ")
     stop_ids_str = [str(stop_id) for stop_id in stop_ids]
-    print(" -> ".join(stop_ids_str))
+    print(" | ".join(stop_ids_str))
     print("Total stops: " + str(len(stop_ids) - 1))
 
+def get_polyline_list(path):
+    polyline_list = []
+    for node in path:
+        if node.directions is not None:
+            polyline_list.append(get_polyline_points(node.directions))
+    return polyline_list
 
 if __name__ == '__main__':
     bus_stops_dict = generate_bus_stops(bus_stops_df)
-
 
     # for trouble shooting in algo, uncomment below
     # for bus_stop in bus_stops_dict.values():
@@ -239,35 +255,36 @@ if __name__ == '__main__':
     '''
     EXAMPLE 1: UNCOMMENT BELOW TO TEST ALGORITHM
     '''
-    start = 68
-    end = 3
-    print(f"Start bus stop: {bus_stops_dict[start].name}, id {bus_stops_dict[start].stop_id}\nEnd: {bus_stops_dict[end].name},  id {bus_stops_dict[end].stop_id}\n")
-
-    path = get_path(aStar(start, end, bus_stops_dict))
-    #optional optimize path below
-    path = optimize_path(path)
-    printPath(path)
-
-    print()
-    print("Expected path from prof:\nStep 1 : From Majlis Bandaraya Johor Bahru, take bus service P102 for 8 stops, alight at Petronas Kiosks @ Taman Bayu Puteri")
-    print("Step 2 : From Petronas Kiosks @ Taman Bayu Puteri, takes bus service P106 for 16 stops to AEON Tebrau City.")
-    print("Total stops: 24")
+    # start = 68
+    # end = 3
+    # print(
+    #     f"Start bus stop: {bus_stops_dict[start].name}, id {bus_stops_dict[start].stop_id}\nEnd: {bus_stops_dict[end].name},  id {bus_stops_dict[end].stop_id}\n")
+    #
+    # path = get_path(aStar(start, end, bus_stops_dict))
+    # # optional optimize path below
+    # path = optimize_path(path)
+    # printPath(path)
+    #
+    # print()
+    # print(
+    #     "Expected path from prof:\nStep 1 : From Majlis Bandaraya Johor Bahru, take bus service P102 for 8 stops, alight at Petronas Kiosks @ Taman Bayu Puteri")
+    # print("Step 2 : From Petronas Kiosks @ Taman Bayu Puteri, takes bus service P106 for 16 stops to AEON Tebrau City.")
+    # print("Total stops: 24")
 
     # print()
     '''
        EXAMPLE 2: UNCOMMENT BELOW TO TEST ALGORITHM
     '''
-    # start = 65
-    # end = 140
-    #
-    # path = get_path(aStar(start, end, bus_stops_dict))
-    # optional optimize path below
-    # path = optimize_path(path)
-    # print(f"Start bus stop: {bus_stops_dict[start].name}, id {bus_stops_dict[start].stop_id}\nEnd: {bus_stops_dict[end].name},  id {bus_stops_dict[end].stop_id}\n")
-    # printPath(path)
-    #
-    # print()
-    # print("Expected path from prof:\nStep 1 : From Kulai Terminal, take bus service P411 for 10 stops, alight at Medan Selara Senai")
-    # print("Step 2 : Cross the road to Opp Medan Selera Senai, take bus service P403 for 6, alight at Senai Airport Terminal")
-    # print("Total stops: 16")
+    start = 65
+    end = 140
 
+    path = get_path(aStar(start, end, bus_stops_dict))
+    # optional optimize path below
+    path = optimize_path(path)
+    print(f"Start bus stop: {bus_stops_dict[start].name}, id {bus_stops_dict[start].stop_id}\nEnd: {bus_stops_dict[end].name},  id {bus_stops_dict[end].stop_id}\n")
+    printPath(path)
+
+    print()
+    print("Expected path from prof:\nStep 1 : From Kulai Terminal, take bus service P411 for 10 stops, alight at Medan Selara Senai")
+    print("Step 2 : Cross the road to Opp Medan Selera Senai, take bus service P403 for 6, alight at Senai Airport Terminal")
+    print("Total stops: 16")
