@@ -1,12 +1,16 @@
+from maps_client import *
+
 from collections import deque
 from queue import PriorityQueue
-from maps_client import *
+
 import geopy.distance
 import pandas as pd
+
 bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")  # get dataframe of all bus stops
 d = Directions()
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300 # 5 minutes
+
 def generate_bus_stops(bus_stops_df):
     bus_stops = {}
     for stop_id in bus_stops_df["stop_id"]:
@@ -37,7 +41,6 @@ def init_neighbors(neighbors, service, stop_no):
             neighbors[stop_id] = set()
 
         neighbors[stop_id].add(service)
-
 
 
 class BusStop:
