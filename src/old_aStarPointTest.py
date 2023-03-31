@@ -78,7 +78,7 @@ def aStar(start, goal, graph):
         visited.add(node.getCoords())
 
         # Get the neighbors of the node
-        neighbors_list = node.get_neighbors()
+        neighbors_list = node.init_neighbors()
 
         # For each neighbor
         for neighbor in neighbors_list:
@@ -89,15 +89,8 @@ def aStar(start, goal, graph):
             neighbors_neighbors = find_neighbors(graph, neighbor)
             new_node = Node(neighbor, neighbors_neighbors, node)
             # Add the new node to the queue
+
             new_node_cost = new_node.get_cost() + new_node.get_heuristic(goal_node)
-            # check if the node is already in the queue
-            # if new_node in queue.queue:
-            #     for item in queue.queue:
-            #         if item[1] == new_node:
-            #             if item[0] > new_node_cost: # if it is, only add if the cost is lower
-            #                 queue.put((new_node_cost, new_node))
-            #                 break
-            # else:
             queue.put((new_node_cost, new_node))
     # If the queue is empty, return None
     return None
@@ -126,9 +119,6 @@ def printPath(path, graph):
     points = [get_point_with_coords(graph, node.getCoords()) for node in path]
     points_str = [str(point) for point in points]
     print(" -> ".join(points_str))
-    # for node in path:
-    #     # Print the node
-    #     print(f"{get_point_with_coords(graph, node.getCoords())}")
 
 def find_neighbors(graph, coords):
     for node in graph.values():

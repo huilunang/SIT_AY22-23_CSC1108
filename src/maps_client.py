@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import googlemaps
 
 class Client:
@@ -57,6 +59,24 @@ class Directions(Client):
 
         return directions
 
+    def get_distance(self, origin, destination):
+        directions = self.direction(origin, destination)
+        return directions[0]["legs"][0]["distance"]["value"]
+
+    def get_duration(self, origin, destination):
+        directions = self.direction(origin, destination)
+        return directions[0]["legs"][0]["duration"]["value"]
+    def get_walking_distance(self, origin, destination):
+        directions = self.direction(origin, destination, mode="walking")
+        return directions[0]["legs"][0]["distance"]["value"]
+
+    def get_walking_duration(self, origin, destination):
+        directions = self.direction(origin, destination, mode="walking")
+        return directions[0]["legs"][0]["duration"]["value"]
+
+    def get_cost_duration(self, origin, destination):
+        directions = self.direction(origin, destination)
+        return directions[0]["legs"][0]["distance"]["value"], directions[0]["legs"][0]["duration"]["value"]
 
 # dm = DistanceMatrix()
 # print(dm.distance("Kampung Melayu Kulai", "Kulai Terminal", mode="transit"))
