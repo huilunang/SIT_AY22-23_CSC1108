@@ -164,6 +164,11 @@ def get_html_instructions(directions):
     for step in steps:
         instructions_list.append(f"{step['html_instructions']}, walk for {step['distance']['text']}.")
     instructions = '\n'.join(instructions_list)
+    instructions = instructions.replace("font-size:0.9em", "display: inline")
+    instructions = instructions.replace('/<wbr/>', " ")
+    instructions = instructions.replace("<b>", "")
+    instructions = instructions.replace("</b>", "")
+
     return instructions
 
 # if __name__ == '__main__':

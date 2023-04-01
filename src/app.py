@@ -80,14 +80,14 @@ def generate_map():
             map_div_1 = '<div id="map_canvas"></div>'
 
             # TODO: add travel instructions from algorithm
-            map_route = f'<div id="route"><p>START</p><p>{origin}</p><p>END</p><p>{destination}</p></div><br>'
+            map_route = f'<div id="route"><p><b>ORIGIN</b></p><p>{origin}</p><p><b>DESTINATION</b></p><p>{destination}</p></div><button id="show_directions" onclick="toggleDirections()">Click for DIRECTIONS</button>'
             instructions_list = [route.instructions for route in routes]
             instruction_str = ''
             step = 1
             for instruction in instructions_list:
-                instruction_str += f"Step {step}: {instruction}<br>"
+                instruction_str += f"<b>Step {step}:</b> {instruction}<br>"
                 step += 1
-            map_instructions = f'<div id="map_instruct"><p>DIRECTIONS</p><p>{instruction_str}</p></div>'
+            map_instructions = f'<div id="map_instruct" class="map_instruct_class"><p>{instruction_str}</p></div>'
 
             return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
                                    map_script_2=map_script_2, map_route=map_route,
