@@ -32,11 +32,8 @@ def generate_map():
         response = requests.get(url)
         data = json.loads(response.text)
 
-        print("1")
-
         # extract the polyline points and decode them into latitude/longitude coordinates
         if data['status'] == 'OK' and data['routes']:
-            print("2")
             route = data['routes'][0]['overview_polyline']['points']
             coords = decode_polyline(route)
 
@@ -57,7 +54,6 @@ def generate_map():
             gmap.marker(coords[0][0], coords[0][1], label="S", color="green")
             gmap.marker(coords[-1][0], coords[-1][1], label="D", color="red")
 
-            print("1")
             # create html elements to insert into html template
             map_html = gmap.get()
             html_finder = BeautifulSoup(map_html, 'html.parser')
