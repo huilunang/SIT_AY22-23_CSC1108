@@ -1,0 +1,63 @@
+{
+    "destination_addresses": [
+        "Kulai, Johor, Malaysia",
+        "Jln Datin Halimah, Larkin Jaya, 80350 Johor Bahru, Johor, Malaysia"
+    ],
+    "origin_addresses": [
+        "Kampung Melayu Kulai, 81000 Kulai, Johor, Malaysia",
+        "Kulai, Johor, Malaysia"
+    ],
+    "rows": [
+        // origin 1
+        {
+            "elements": [
+                // destination 1
+                {
+                    "distance": {
+                        "text": "0.8 km",
+                        "value": 812
+                    },
+                    "duration": {
+                        "text": "9 mins",
+                        "value": 562
+                    },
+                    "status": "OK"
+                },
+                // destination 2
+                {
+                    "distance": {
+                        "text": "32.4 km",
+                        "value": 32437
+                    },
+                    "duration": {
+                        "text": "1 hour 36 mins",
+                        "value": 5741
+                    },
+                    "status": "OK"
+                }
+            ]
+        },
+        // origin 2
+        {
+            "elements": [
+                // destination 1
+                {
+                    "status": "ZERO_RESULTS"
+                },
+                // destinaton 2
+                {
+                    "distance": {
+                        "text": "31.8 km",
+                        "value": 31790
+                    },
+                    "duration": {
+                        "text": "1 hour 28 mins",
+                        "value": 5301
+                    },
+                    "status": "OK"
+                }
+            ]
+        }
+    ],
+    "status": "OK"
+}
