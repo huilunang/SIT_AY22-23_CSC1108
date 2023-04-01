@@ -1,6 +1,6 @@
-from src.Classes.Node import get_directions_of_node, get_bus_stop_list
-from src.Classes.Route import BusRoute, Route
-from src.maps_client import Directions
+from Classes.Node import get_directions_of_node, get_bus_stop_list
+from Classes.Route import BusRoute, Route
+from maps_client import Directions
 
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300  # 5 minutes
@@ -8,7 +8,6 @@ BUS = 0
 WALK = 1
 
 D = Directions()
-
 
 def get_path(node):
     # Initialize the path list
@@ -35,7 +34,7 @@ def optimize_path(path):
     while found_better_path:
         # reset flag
         found_better_path = False
-        for i in range(0, len(path) - 1):  # i = first bus stop
+        for i in range(0, len(path) - 1): # i = first bus stop
 
             # if a better path has already been found previously,
             # need to restart the loop since optimized_path is now changed
@@ -44,8 +43,7 @@ def optimize_path(path):
 
             # j = last bus stop, loop only until MINIMUM_BUS_STOPS_SAVED stops away, since no point in optimizing if less than 5 stops saved
             for j in range(len(path) - 1, i + MINIMUM_BUS_STOPS_SAVED, -1):
-                walking_duration = D.get_walking_duration(path[i].bus_stop.coords,
-                                                          path[j].bus_stop.coords)
+                walking_duration = D.get_walking_duration(path[i].bus_stop, path[j].bus_stop)
                 if walking_duration <= MAX_WALKING_DURATION:  # if required to walk more than 5 minutes, then no point in optimizing
                     bus_duration = path[j].get_bus_stop_duration_to(path[i])
                     if walking_duration < bus_duration:
@@ -63,8 +61,7 @@ def optimize_path(path):
                         optimized_path.append(path[i:j + 1])
                         optimized_path.append(path[j:])
 
-                        path = path[
-                               j:]  # remove all bus stops before j, since they have already been checked for optimization
+                        path = path[j:]  # remove all bus stops before j, since they have already been checked for optimization
 
                         # for troubleshooting in algo, uncomment below
 
@@ -163,7 +160,7 @@ def get_directions_of_path(optimized_path):
         else:  # if travel_type = WALK
             start_coords = path[0].bus_stop.coords
             end_coords = path[-1].bus_stop.coords
-            walk_directions = D.direction(start_coords, end_coords, mode="walking")
+            walk_directions = D.direction(path[0].bus_stop, path[-1].bus_stop, mode="walking")
             new_walk_route = Route(start_coords, end_coords, walk_directions)
             route_list.append(new_walk_route)
 
@@ -174,7 +171,6 @@ def get_directions_of_path(optimized_path):
 def get_bus_service_path(path):
     busses = []
     bus_path = {}
-
     for i in range(0, len(path) - 1):
         this_busstop = path[i].bus_stop
         next_bus_stop = path[i + 1].bus_stop
