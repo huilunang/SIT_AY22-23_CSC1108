@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map with Route</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #map {
+        height: 1000px;
+        width: 100%;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 100px;
+        left: 1%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 50px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        border-radius: 15px
+      }
+      #inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+
+      #submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #submit-btn:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <form id="inputs" action="/" method="post">
+        <label for="origin-input">Start:</label>
+        <input type="text" id="origin-input" name="origin-input">
+        <br>
+        <label for="destination-input">Destination:</label>
+        <input type="text" id="destination-input" name="destination-input">
+        <br>
+      <button id="submit-btn">Submit</button>
+      </form>
+    </div>
+    <div id="map">
+        {{ map_div|safe }}
+    </div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 1.4927, lng: 103.7414}
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI&callback=initMap"
+    async defer></script>
+  </body>
+</html>
