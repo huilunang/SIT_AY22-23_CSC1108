@@ -42,7 +42,7 @@ def init_neighbors(neighbors, service, stop_no):
         neighbors[stop_id].add(service)
 
 
-def get_nearest_bus_stops(origin):
+def get_nearest_bus_stop(origin,bus_stops_dict):
     df = bus_stops_df.copy().drop_duplicates(subset="stop_id")
 
     # Distance between two coordinates in meters using Haversine
@@ -50,7 +50,8 @@ def get_nearest_bus_stops(origin):
         origin, (x["latitude"], x["longitude"])).m, axis=1)
     df = df.sort_values(by=["nearest_bus_to_user"])
 
-    return df.iloc[0]["stop_id"]
+    return bus_stops_dict[df.iloc[0]["stop_id"]]
+
 
 # # Example from Kampung Melayu Kulai
 # get_nearest_bus_stops((1.6592200613926118, 103.59836258258849))

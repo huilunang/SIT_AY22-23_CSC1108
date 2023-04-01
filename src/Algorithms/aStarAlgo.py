@@ -1,17 +1,17 @@
 from queue import PriorityQueue
 
-from Classes.Node import Node
+from src.Classes.Node import Node
 
 
-def aStar(start, goal, bus_stops_dict):
+def aStar(start_stop, goal_stop, bus_stops_dict):
     # Initialize the priority queue
     queue = PriorityQueue()
     # Initialize the visited set
     visited_coords = set()
 
     # Create the start and goal nodes
-    start_node = Node(bus_stops_dict[start], None)
-    goal_node = Node(bus_stops_dict[goal], None)
+    start_node = Node(start_stop, None)
+    goal_node = Node(goal_stop, None)
 
     # Add the start node to the queue
     queue.put((0, start_node))
