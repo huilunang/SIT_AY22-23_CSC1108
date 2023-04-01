@@ -3,6 +3,8 @@ from Classes.BusStop import BusStop
 import geopy.distance
 import pandas as pd
 
+from src.maps_client import Directions, get_walking_distance_from_directions
+
 # get dataframe of all bus stops
 bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")
 
@@ -50,8 +52,14 @@ def get_nearest_bus_stop(origin,bus_stops_dict):
         origin, (x["latitude"], x["longitude"])).m, axis=1)
     df = df.sort_values(by=["nearest_bus_to_user"])
 
+    df = df.iloc[:5, :] # take only top 5
+    df.loc[:, "nearest_walk"] = df.apply(lambda x: get_walking_distance_from_directions(Directions().direction(
+        origin, (x["latitude"], x["longitude"]))), axis=1)
+    df = df.sort_values(by=["nearest_walk"])
     return bus_stops_dict[df.iloc[0]["stop_id"]]
 
 
-# # Example from Kampung Melayu Kulai
-# get_nearest_bus_stops((1.6592200613926118, 103.59836258258849))
+# bus_stops_dict = generate_bus_stops()
+# D = Directions()
+# get_nearest_bus_stop((1.4854384, 103.7628811), bus_stops_dict)
+

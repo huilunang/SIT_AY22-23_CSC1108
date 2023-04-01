@@ -79,13 +79,13 @@ class Directions(Client):
     def __init__(self):
         super().__init__()
 
-    def direction(self, origin: str | BusStop, destination: str | BusStop,
+    def direction(self, origin: tuple | BusStop, destination: tuple | BusStop,
                   cache: bool = True, mode: str = "driving", avoid: str = None,
                   traffic: str = None, waypoints: list = None) -> list:
         """ To get the distance, duration, waypoints (routes), and other metrics between two points
         Args:
-            origin (str) | (BusStop): Starting coordinate | bus
-            destination (str) | (BusStop): Ending coordinate | bus
+            origin (tuple) | (BusStop): Starting coordinate | bus
+            destination (tuple) | (BusStop): Ending coordinate | bus
             cache (bool): Cache only for bus transiting routes
         Optional Args:
             mode (str): "driving" | "walking" | "transit" (public transport)
@@ -97,22 +97,26 @@ class Directions(Client):
         Returns:
             List containing distance, duration, and other metrics between two points
         """
-        if cache:
+        if isinstance(origin, BusStop):
+            origin = origin.coords
+        if isinstance(destination, BusStop):
+            destination = destination.coords
+
+        if cache and isinstance(origin, BusStop) and isinstance(destination, BusStop):
             c = Cache()
 
             data = c.get_cache(origin.stop_id, destination.stop_id, mode)
 
             if data is False:
                 directions = self.client.directions(
-                    origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
+                    origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
                     waypoints=waypoints)
                 c.cache(origin.stop_id, destination.stop_id, directions, mode)
-
                 return directions
             return data
         else:
             directions = self.client.directions(
-                    origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
+                    origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
                     waypoints=waypoints)
             return directions
 
