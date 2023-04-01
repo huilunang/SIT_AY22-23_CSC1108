@@ -24,8 +24,6 @@ def get_path(node):
     return path
 
 
-
-
 def optimize_path(path):
     optimized_path = []
     original_path = path.copy()
@@ -45,8 +43,7 @@ def optimize_path(path):
 
             # j = last bus stop, loop only until MINIMUM_BUS_STOPS_SAVED stops away, since no point in optimizing if less than 5 stops saved
             for j in range(len(path) - 1, i + MINIMUM_BUS_STOPS_SAVED, -1):
-                walking_duration = D.get_walking_duration(path[i].bus_stop.coords,
-                                                          path[j].bus_stop.coords)
+                walking_duration = D.get_walking_duration(path[i].bus_stop, path[j].bus_stop)
                 if walking_duration <= MAX_WALKING_DURATION:  # if required to walk more than 5 minutes, then no point in optimizing
                     bus_duration = path[j].get_bus_stop_duration_to(path[i])
                     if walking_duration < bus_duration:
@@ -164,7 +161,7 @@ def get_directions_of_path(optimized_path):
         else: #if travel_type = WALK
             start_coords = path[0].bus_stop.coords
             end_coords = path[-1].bus_stop.coords
-            walk_directions = D.direction(start_coords, end_coords)
+            walk_directions = D.direction(path[0].bus_stop, path[-1].bus_stop)
             new_walk_route = Route(start_coords, end_coords, walk_directions)
             route_list.append(new_walk_route)
 
