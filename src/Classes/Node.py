@@ -23,7 +23,7 @@ class Node:
 
     def get_directions(self):
         if self.parent:
-            return D.direction(self.bus_stop.coords, self.parent.bus_stop.coords)
+            return D.direction(self.bus_stop, self.parent.bus_stop)
         else:
             return None
 
@@ -56,15 +56,16 @@ class Node:
 
 
 def get_directions_of_node(goal_node, start_node):
-    node_directions = []
-    current_node = start_node
+    waypoints = []
+    current_node = start_node.parent
     while current_node.parent:
-        node_directions.append(current_node.directions)
+        waypoints.append(current_node.bus_stop.coords)
         current_node = current_node.parent
         if current_node == goal_node:
             break
-    node_directions.reverse()
-    return node_directions
+    waypoints.reverse()
+
+    return D.direction(start_node.bus_stop, goal_node.bus_stop, waypoints=waypoints)
 
 
 def get_bus_stop_list(goal_node, start_node):
