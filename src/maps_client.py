@@ -16,25 +16,31 @@ class Cache:
             with open(self.file_path, "wb") as f:
                 pickle.dump({}, f)
 
-    def cache(self, source_id: int, dest_id: int, cache_data: list) -> None:
+    def cache(self, source_id: int, dest_id: int, cache_data: list, mode: str) -> None:
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
 
         if source_id not in data:
             data[source_id] = {}
         if dest_id not in data[source_id]:
-            data[source_id][dest_id] = cache_data
+            data[source_id][dest_id] = {}
+        if mode not in data[source_id][dest_id]:
+            data[source_id][dest_id][mode] = cache_data
 
             with open(self.file_path, "wb") as f:
                 pickle.dump(data, f)
 
-    def get_cache(self, source_id: int, dest_id: int) -> bool | list:
+    def get_cache(self, source_id: int, dest_id: int, mode) -> bool | list:
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
 
-        if source_id not in data or dest_id not in data[source_id]:
+        if source_id not in data:
             return False
-        return data[source_id][dest_id]
+        elif dest_id not in data[source_id]:
+            return False
+        elif mode not in data[source_id][dest_id]:
+            return False
+        return data[source_id][dest_id][mode]
 
 
 class Client:
@@ -73,7 +79,7 @@ class Directions(Client):
         super().__init__()
 
     def direction(self, origin: str | BusStop, destination: str | BusStop,
-                  cache: bool = True, mode: str = None, avoid: str = None,
+                  cache: bool = True, mode: str = "driving", avoid: str = None,
                   traffic: str = None, waypoints: list = None) -> list:
         """ To get the distance, duration, waypoints (routes), and other metrics between two points
         Args:
@@ -93,13 +99,13 @@ class Directions(Client):
         if cache:
             c = Cache()
 
-            data = c.get_cache(origin.stop_id, destination.stop_id)
+            data = c.get_cache(origin.stop_id, destination.stop_id, mode)
 
             if data is False:
                 directions = self.client.directions(
                     origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
                     waypoints=waypoints)
-                c.cache(origin.stop_id, destination.stop_id, directions)
+                c.cache(origin.stop_id, destination.stop_id, directions, mode)
 
                 return directions
             return data
