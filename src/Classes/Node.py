@@ -75,6 +75,7 @@ def get_bus_stop_list(goal_node, start_node):
         bus_stop_list.append(current_node.bus_stop)
         current_node = current_node.parent
         if current_node == goal_node:
+            bus_stop_list.append(current_node.bus_stop)
             break
     bus_stop_list.reverse()
     return bus_stop_list

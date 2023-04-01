@@ -4,7 +4,7 @@ import geopy.distance
 import pandas as pd
 
 # get dataframe of all bus stops
-bus_stops_df = pd.read_csv("data/bus_stops_combine.csv")
+bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")
 
 
 def generate_bus_stops():
@@ -50,7 +50,7 @@ def get_nearest_bus_stops(origin):
         origin, (x["latitude"], x["longitude"])).m, axis=1)
     df = df.sort_values(by=["nearest_bus_to_user"])
 
-    return (df.iloc[0]["latitude"], df.iloc[0]["longitude"])
+    return df.iloc[0]["stop_id"]
 
 # # Example from Kampung Melayu Kulai
 # get_nearest_bus_stops((1.6592200613926118, 103.59836258258849))
