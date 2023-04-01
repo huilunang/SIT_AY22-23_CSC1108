@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Map with Route</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     {% if map_script_1 %}
@@ -52,9 +53,8 @@
         border-radius: 15px;
         font-size: 14px;
         max-width: 400px;
-      }
-      .map_instruct_class{
-        font-size: 12px;
+        max-height: 800px;
+        overflow: scroll;
       }
       #inputs {
         display: flex;
@@ -123,7 +123,7 @@
         <label for="destination-input">Destination:</label>
         <input type="text" id="destination-input" name="destination-input">
         <br>
-      <button id="submit-btn">Submit</button>
+      <button id="submit-btn">GO    <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
       </form>
       <br>
       {% if map_route %}
