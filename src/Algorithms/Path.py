@@ -1,6 +1,7 @@
-from src.Classes.Node import get_directions_of_node, get_bus_stop_list
-from src.Classes.Route import BusRoute, Route
-from src.maps_client import Directions
+from Classes.Node import get_directions_of_node, get_bus_stop_list
+from Classes.Route import BusRoute, Route
+from maps_client import Directions
+
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300  # 5 minutes
 BUS = 0

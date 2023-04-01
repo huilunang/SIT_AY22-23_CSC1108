@@ -1,6 +1,9 @@
+from maps_client import *
+
 import geopy.distance
-from src.maps_client import *
+
 D = Directions()
+
 class Node:
     def __init__(self, bus_stop, parent):
         self.bus_stop = bus_stop

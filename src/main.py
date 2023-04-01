@@ -1,6 +1,6 @@
-from src.Algorithms.Path import get_path, optimize_path, print_optimized_path
-from src.Algorithms.aStarAlgo import aStar
-from src.bus_stops_init import generate_bus_stops
+from Algorithms.Path import get_path, optimize_path, print_optimized_path
+from Algorithms.aStarAlgo import aStar
+from bus_stops_init import generate_bus_stops
 
 if __name__ == '__main__':
     bus_stops_dict = generate_bus_stops()
