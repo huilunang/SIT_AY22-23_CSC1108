@@ -2,7 +2,7 @@ from Classes.BusStop import BusStop
 
 import pandas as pd
 
-bus_stops_df = pd.read_csv("data/bus_stops_combine.csv")  # get dataframe of all bus stops
+bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")  # get dataframe of all bus stops
 
 def generate_bus_stops():
     bus_stops = {}

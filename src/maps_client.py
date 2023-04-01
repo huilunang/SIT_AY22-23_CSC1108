@@ -10,11 +10,12 @@ import googlemaps
 
 class Cache:
     def __init__(self):
-        self.file_path = os.path.join("cache", "cache.pickle")
+        self.file_path = os.path.join("..\\cache", "cache.pickle")
 
         if not os.path.exists(self.file_path):
             with open(self.file_path, "wb") as f:
                 pickle.dump({}, f)
+
 
     def cache(self, source_id: int, dest_id: int, cache_data: list, mode: str) -> None:
         with open(self.file_path, "rb") as f:
@@ -156,6 +157,13 @@ def get_walking_duration(directions):
 def get_polyline_points(directions):
     return directions[0]['overview_polyline']['points']
 
+
+def get_html_instructions(directions):
+    steps = directions[0]['legs'][0]['steps']
+    instructions = []
+    for step in steps:
+        instructions.append(f"In {step['distance']['text']}, {step['html_instructions']}")
+    return instructions
 
 # if __name__ == '__main__':
 

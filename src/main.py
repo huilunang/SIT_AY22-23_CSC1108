@@ -1,7 +1,8 @@
-from Algorithms.Path import get_path, optimize_path, print_optimized_path, get_directions_of_path
-from Algorithms.aStarAlgo import aStar
-from Classes.Route import BusRoute
-from bus_stops_init import generate_bus_stops
+from src.Algorithms.Path import get_path, optimize_path, print_optimized_path, get_directions_of_path
+from src.Algorithms.aStarAlgo import aStar
+from src.Classes.Route import BusRoute
+from src.bus_stops_init import generate_bus_stops
+from src.Classes import Route
 
 if __name__ == '__main__':
     bus_stops_dict = generate_bus_stops()
@@ -50,12 +51,10 @@ if __name__ == '__main__':
         if isinstance(route, BusRoute):
             print(f"Route {route_no}:")
             # this is a bus route
-            for direction in route.directions:
-                print(direction[0]['overview_polyline']['points'])
-            # print(route.directions[0]['overview_polyline']['points'])
+            print(f"From {route.origin_name}, take bus service {route.service} for {route.num_of_stops_to_dest} stops, alight at {route.dest_name}")
         else:
             print(f"Route {route_no}:")
-            print(route.directions[0]['overview_polyline']['points'])
+            print(f"From {route.origin_name}, walk to {route.dest_name}")
             pass
             # this is a walking route
         route_no += 1

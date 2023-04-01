@@ -1,6 +1,6 @@
-from Classes.Node import get_directions_of_node, get_bus_stop_list
-from Classes.Route import BusRoute, Route
-from maps_client import Directions
+from src.Classes.Node import get_directions_of_node, get_bus_stop_list
+from src.Classes.Route import BusRoute, Route
+from src.maps_client import Directions
 
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300  # 5 minutes
@@ -158,10 +158,13 @@ def get_directions_of_path(optimized_path):
                     route_list.append(new_bus_route)
                     current_bus_stop += number_of_stops
         else:  # if travel_type = WALK
+            start_name = path[0].bus_stop.name
+            end_name = path[-1].bus_stop.name
             start_coords = path[0].bus_stop.coords
             end_coords = path[-1].bus_stop.coords
+
             walk_directions = D.direction(path[0].bus_stop, path[-1].bus_stop, mode="walking")
-            new_walk_route = Route(start_coords, end_coords, walk_directions)
+            new_walk_route = Route(start_name, end_name, start_coords, end_coords, walk_directions)
             route_list.append(new_walk_route)
 
         travel_type = (travel_type + 1) % 2  # invert travel type
