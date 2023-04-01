@@ -1,9 +1,9 @@
 import pandas as pd
 from src.Classes.BusStop import BusStop
+bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")  # get dataframe of all bus stops
 
 
 def generate_bus_stops():
-    bus_stops_df = pd.read_csv("../data/bus_stops_combine.csv")  # get dataframe of all bus stops
     bus_stops = {}
     for stop_id in bus_stops_df["stop_id"]:
         stop_details = bus_stops_df.loc[(bus_stops_df["stop_id"] == stop_id)].values
@@ -22,6 +22,7 @@ def generate_bus_stops():
 
 
 def init_neighbors(neighbors, service, stop_no):
+
     # fetch the bus stop details where the svc matches, and stop_no is +1 or -1 of the current stop_no
     next_stop = stop_no + 1
     result = bus_stops_df.loc[(bus_stops_df["bus_svc"] == service) & (bus_stops_df["stop_no"] == next_stop), (

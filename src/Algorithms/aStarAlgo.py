@@ -1,5 +1,7 @@
 from queue import PriorityQueue
 
+from src.Classes.Node import Node
+
 
 def aStar(start, goal, bus_stops_dict):
     # Initialize the priority queue

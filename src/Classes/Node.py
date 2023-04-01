@@ -1,6 +1,6 @@
 import geopy.distance
-
 from src.maps_client import *
+D = Directions()
 class Node:
     def __init__(self, bus_stop, parent):
         self.bus_stop = bus_stop
@@ -20,7 +20,7 @@ class Node:
 
     def get_directions(self):
         if self.parent:
-            return d.direction(self.bus_stop.coords, self.parent.bus_stop.coords)
+            return D.direction(self.bus_stop.coords, self.parent.bus_stop.coords)
         else:
             return None
 
