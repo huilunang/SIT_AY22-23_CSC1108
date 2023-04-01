@@ -53,9 +53,9 @@ class Directions(Client):
     """
 
     def direction(self, origin: str | list, destination: str | list, mode: str = None,
-                  avoid: str = None, traffic: str = None):
+                  avoid: str = None, traffic: str = None, waypoints=None):
         directions = self.client.directions(
-            origin, destination, mode=mode, avoid=avoid, traffic_model=traffic)
+            origin, destination, mode=mode, avoid=avoid, traffic_model=traffic, waypoints=waypoints)
 
         return directions
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     # print(dm.distance(["Kampung Melayu Kulai", "Kulai Terminal"],
     #       ["Kulai Terminal", "Pejabat Daerah Tanah Johor Bahru"], mode="transit"))
     d = Directions()
-    # print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking")[0]['routes'][0]['overview_polyline']['points'])
-    legs = d.direction("Kampung Melayu Kulai", "Kulai Terminal")[0]['legs'][0]['steps']
-    for step in legs:
-        print(f"In {step['distance']['text']}, {step['html_instructions']}")
+    print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking")[0]['overview_polyline']['points'])
+    # legs = d.direction("Kampung Melayu Kulai", "Kulai Terminal")[0]['legs'][0]['steps']
+    # for step in legs:
+    #     print(f"In {step['distance']['text']}, {step['html_instructions']}")

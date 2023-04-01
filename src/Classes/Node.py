@@ -1,6 +1,8 @@
 import geopy.distance
 from src.maps_client import *
 D = Directions()
+
+
 class Node:
     def __init__(self, bus_stop, parent):
         self.bus_stop = bus_stop
@@ -20,7 +22,7 @@ class Node:
 
     def get_directions(self):
         if self.parent:
-            return D.direction(self.bus_stop.coords, self.parent.bus_stop.coords)
+            return D.direction(self.parent.bus_stop.coords, self.bus_stop.coords)
         else:
             return None
 
@@ -53,16 +55,16 @@ class Node:
 
 
 def get_directions_of_node(goal_node, start_node):
-    node_directions = []
+    directions_list = []
     current_node = start_node
     while current_node.parent:
-        node_directions.append(current_node.directions)
+        start_node = current_node.parent
+        directions_list.append(D.direction(current_node.parent.bus_stop.coords, current_node.bus_stop.coords))
         current_node = current_node.parent
         if current_node == goal_node:
             break
-    node_directions.reverse()
-    return node_directions
-
+    directions_list.reverse()
+    return directions_list
 
 def get_bus_stop_list(goal_node, start_node):
     bus_stop_list = []
