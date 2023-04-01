@@ -23,36 +23,34 @@ D = Directions()
 def generate_map():
     origin = ""
     destination = ""
-    # TODO: parse waypoints from algorithm HERE
-    waypoints = "(1.661364287, 103.6037274) | (1.654174485, 103.6097104) | (1.650930433, 103.6114855) | (1.645258022, 103.6164964) | (1.639820913, 103.6246646) | (1.635949316, 103.6299317) | (1.633014316, 103.6334982) | (1.628655063, 103.6380771) | (1.620372317, 103.6461494) | (1.600263406, 103.6445932) | (1.61020106, 103.6571529) | (1.611006845, 103.6562933) | (1.612501318, 103.6581689) | (1.614542434, 103.658532) | (1.626134397, 103.6563151)"
-    waypoints = waypoints.replace(")", "")
-    waypoints = waypoints.replace("(", "")
+    waypoints = ""
     api_key = "AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI"
 
     if request.method == "POST":
         origin = request.form.get("origin-input")
         destination = request.form.get("destination-input")
-        # origin = "1.662682805, 103.5988911"
-        # destination = "1.634937925, 103.6663069"
 
         # make a request to the Google Directions API
         url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
         response = requests.get(url)
         data = json.loads(response.text)
 
+        # set gmaps on origin and create plot obj
         if ',' in origin:
             origin_list = origin.split(",")
             gmap = gmplot.GoogleMapPlotter(float(origin_list[0]), float(origin_list[1]), apikey=api_key, zoom=13)
             gmap.marker(float(origin_list[0]), float(origin_list[1]), color="green", label="S")
-            if ',' in destination:
-                destination_list = destination.split(",")
-                gmap.marker(float(destination_list[0]), float(destination_list[1]), color="red", label="D")
-
         else:
             gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key, zoom=13)
             origin = gmplot.GoogleMapPlotter.geocode(origin, apikey=api_key)
-            destination = gmplot.GoogleMapPlotter.geocode(destination, apikey=api_key)
             gmap.marker(float(origin[0]), float(origin[1]), color="green", label="S")
+
+        if ',' in destination:
+            destination_list = destination.split(",")
+            gmap.marker(float(destination_list[0]), float(destination_list[1]), color="red", label="D")
+
+        else:
+            destination = gmplot.GoogleMapPlotter.geocode(destination, apikey=api_key)
             gmap.marker(float(destination[0]), float(destination[1]), color="red", label="D")
 
         # extract the polyline points and decode them into latitude/longitude coordinates
@@ -105,15 +103,15 @@ def generate_map():
             map_script_1 = map_script[0]
             map_script_2 = map_script[1]
             map_div_1 = '<div id="map_canvas"></div>'
-
-            # TODO: add travel instructions from algorithm
             map_route = f'<div id="route"><p><b>ORIGIN</b></p><p>{origin}</p><p><b>DESTINATION</b></p><p>{destination}</p></div><button id="show_directions" onclick="toggleDirections()">Click for DIRECTIONS</button>'
             instructions_list = [route.instructions for route in routes]
             instruction_str = ''
             step = 1
-            for instruction in instructions_list:
-                instruction_str += f"<b>Step {step}:</b> {instruction}<br>"
+
+            for i in range(len(instructions_list)):
+                instruction_str += f"<br><b>Step {step} ({routes[i].distance} km, {routes[i].duration} min):<br></b> {instructions_list[i]}<br>"
                 step += 1
+
             map_instructions = f'<div id="map_instruct"><p>{instruction_str}</p></div>'
 
             return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,

@@ -16,7 +16,6 @@ class Cache:
             with open(self.file_path, "wb") as f:
                 pickle.dump({}, f)
 
-
     def cache(self, source_id: int, dest_id: int, cache_data: list, mode: str) -> None:
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
@@ -116,10 +115,9 @@ class Directions(Client):
             return data
         else:
             directions = self.client.directions(
-                    origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
-                    waypoints=waypoints)
+                origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
+                waypoints=waypoints)
             return directions
-
 
     def get_distance(self, origin, destination):
         directions = self.direction(origin, destination)
@@ -164,25 +162,35 @@ def get_polyline_points(directions):
 
 def get_html_instructions(directions):
     steps = directions[0]['legs'][0]['steps']
+    instructions_list = clean_html_instructions(steps)
+    instructions = '\n'.join(instructions_list)
+    return instructions
+
+
+def clean_html_instructions(steps):
     instructions_list = []
     for step in steps:
-        instructions_list.append(f"{step['html_instructions']}, walk for {step['distance']['text']}.")
-    instructions = '\n'.join(instructions_list)
-    instructions = instructions.replace("font-size:0.9em", "display: inline")
-    instructions = instructions.replace('/<wbr/>', " ")
-    instructions = instructions.replace("<b>", "")
-    instructions = instructions.replace("</b>", "")
-
-    return instructions
+        instruction = f"{step['html_instructions']}, walk for {step['distance']['text']}"
+        if "Destination" in instruction or "Restricted" in instruction:
+            instruction = instruction.replace('<div style="font-size:0.9em">', "<br>")
+            instruction = instruction.replace('</div><br>', "")
+            instruction = instruction.replace('</div>', "")
+        else:
+            instruction += "<br>"
+        instruction = instruction.replace('/<wbr/>', " ")
+        instruction = instruction.replace("<b>", "")
+        instruction = instruction.replace("</b>", "")
+        instructions_list.append(instruction)
+    return instructions_list
 
 # if __name__ == '__main__':
 
-    # dm = DistanceMatrix()
-    # print(dm.distance("Kampung Melayu Kulai", "Kulai Terminal", mode="transit"))
-    # print(dm.distance(["Kampung Melayu Kulai", "Kulai Terminal"],
-    #       ["Kulai Terminal", "Pejabat Daerah Tanah Johor Bahru"], mode="transit"))
-    # d = Directions()
-    # print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking")[0]['routes'][0]['overview_polyline']['points'])
-    # legs = d.direction("Kampung Melayu Kulai", "Kulai Terminal")[0]['legs'][0]['steps']
-    # for step in legs:
-    #     print(f"In {step['distance']['text']}, {step['html_instructions']}")
+# dm = DistanceMatrix()
+# print(dm.distance("Kampung Melayu Kulai", "Kulai Terminal", mode="transit"))
+# print(dm.distance(["Kampung Melayu Kulai", "Kulai Terminal"],
+#       ["Kulai Terminal", "Pejabat Daerah Tanah Johor Bahru"], mode="transit"))
+# d = Directions()
+# print(d.direction("Kampung Melayu Kulai", "Kulai Terminal", mode="walking")[0]['routes'][0]['overview_polyline']['points'])
+# legs = d.direction("Kampung Melayu Kulai", "Kulai Terminal")[0]['legs'][0]['steps']
+# for step in legs:
+#     print(f"In {step['distance']['text']}, {step['html_instructions']}")

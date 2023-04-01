@@ -8,8 +8,8 @@ class Route:
         self.dest_coords = dest_coords
         if directions: # if directions is empty, it is a BusRoute which will set its own directions
             self.directions = directions
-            self.distance = get_distance_value(directions)
-            self.duration = get_duration_value(directions)
+            self.distance = round(get_distance_value(directions) / 1000, 2)
+            self.duration = int(get_duration_value(directions) / 60)
             self.instructions = get_html_instructions(directions)
             self.polyline_points = [get_polyline_points(directions)]
 
@@ -22,22 +22,22 @@ class BusRoute(Route):
         self.num_of_stops_to_dest = num_of_stops_to_dest
 
         self.directions_list = directions_list
-        self.distance_list = self.calculate_distance_list()
-        self.duration_list = self.calculate_duration_list()
+        self.distance = round(self.calculate_distance() / 1000, 2)
+        self.duration = int(self.calculate_duration() / 60)
         self.instructions = f"From {self.origin_name}, take bus {service} for {num_of_stops_to_dest} stops. Alight at {self.dest_name}"
         self.polyline_points = self.fetch_polyline_points()
 
-    def calculate_distance_list(self):
-        distance_list = []
+    def calculate_distance(self):
+        distance = 0
         for direction in self.directions_list:
-            distance_list.append(get_distance_value(direction))
-        return distance_list
+            distance += get_distance_value(direction)
+        return distance
 
-    def calculate_duration_list(self):
-        duration_list = 0
+    def calculate_duration(self):
+        duration = 0
         for direction in self.directions_list:
-            duration_list += get_duration_value(direction)
-        return duration_list
+            duration += get_duration_value(direction)
+        return duration
 
     def fetch_html_instructions(self):
         html_instructions = '\n'.join([get_html_instructions(direction) for direction in self.directions_list])

@@ -80,8 +80,8 @@ if __name__ == '__main__':
     '''
     EXAMPLE 3, coords test : UNCOMMENT BELOW TO TEST ALGORITHM
     '''
-    start_coords = (1.661971, 103.598662)
-    end_coords = (1.636587, 103.663852)
+    start_coords = (1.461799, 103.7639603)
+    end_coords = (1.4854384, 103.7628811)
 
     start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
     end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
