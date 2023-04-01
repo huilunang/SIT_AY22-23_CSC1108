@@ -5,6 +5,10 @@ import gmplot
 from bs4 import BeautifulSoup
 
 from decode_polyline import decode_polyline
+from src.Classes.Route import BusRoute
+from src.Algorithms.Path import get_path, optimize_path, get_directions_of_path
+from src.Algorithms.aStarAlgo import aStar
+from src.bus_stops_init import generate_bus_stops
 
 app = Flask(__name__)
 
@@ -34,25 +38,37 @@ def generate_map():
 
         # extract the polyline points and decode them into latitude/longitude coordinates
         if data['status'] == 'OK' and data['routes']:
-            route = data['routes'][0]['overview_polyline']['points']
-            coords = decode_polyline(route)
 
             origin_list = origin.split(",")
-
-            # plot the coordinates on a map using gmplot
             gmap = gmplot.GoogleMapPlotter(float(origin_list[0]), float(origin_list[1]), apikey=api_key, zoom=12)
-            gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="blue",
-                      edge_width=5)
-            waypoints = waypoints.split(" | ")
-            print(waypoints)
-            count = 1
-            for waypoint in waypoints:
-                waypoint = waypoint.split(", ")
-                print(waypoint)
-                gmap.marker(float(waypoint[0]), float(waypoint[1]), label=count, color="lightblue")
-                count = count + 1
-            gmap.marker(coords[0][0], coords[0][1], label="S", color="green")
-            gmap.marker(coords[-1][0], coords[-1][1], label="D", color="red")
+
+            bus_stops_dict = generate_bus_stops()
+            start = 65
+            end = 140
+
+            path = get_path(aStar(start, end, bus_stops_dict))
+            # printPath(path)
+
+            # optional optimize path below
+            optimized_path = optimize_path(path)
+            routes = get_directions_of_path(optimized_path)
+
+            # route = data['routes'][0]['overview_polyline']['points']
+            for r in routes:
+                route = r
+                polyline_list = route.polyline_points
+                coords_list = [decode_polyline(polyline) for polyline in polyline_list]
+
+                # plot the coordinates on a map using gmplot
+                if isinstance(r, BusRoute):
+                    for coords in coords_list:
+                        gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="blue", edge_width=5)
+                        # gmap.marker([coord[0] for coord in coords], [coord[1] for coord in coords], color="blue")
+
+                else:
+                    for coords in coords_list:
+                        gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="green", edge_width=5)
+                        # gmap.marker([coord[0] for coord in coords], [coord[1] for coord in coords], color="lightblue")
 
             # create html elements to insert into html template
             map_html = gmap.get()
@@ -65,8 +81,13 @@ def generate_map():
 
             # TODO: add travel instructions from algorithm
             map_route = f'<div id="route"><p>START</p><p>{origin}</p><p>END</p><p>{destination}</p></div><br>'
-            instructions = "sample walking instructions"
-            map_instructions = f'<div id="map_instruct"><p>DIRECTIONS</p><p>{instructions}</p></div>'
+            instructions_list = [route.instructions for route in routes]
+            instruction_str = ''
+            step = 1
+            for instruction in instructions_list:
+                instruction_str += f"Step {step}: {instruction}<br>"
+                step += 1
+            map_instructions = f'<div id="map_instruct"><p>DIRECTIONS</p><p>{instruction_str}</p></div>'
 
             return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
                                    map_script_2=map_script_2, map_route=map_route,

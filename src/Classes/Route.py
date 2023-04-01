@@ -10,7 +10,7 @@ class Route:
             self.directions = directions
             self.distance = get_distance_value(directions)
             self.duration = get_duration_value(directions)
-            self.html_instructions = [get_html_instructions(directions)]
+            self.instructions = get_html_instructions(directions)
             self.polyline_points = [get_polyline_points(directions)]
 
 class BusRoute(Route):
@@ -24,7 +24,7 @@ class BusRoute(Route):
         self.directions_list = directions_list
         self.distance_list = self.calculate_distance_list()
         self.duration_list = self.calculate_duration_list()
-        self.html_instructions = self.fetch_html_instructions()
+        self.instructions = f"From {self.origin_name}, take bus {service} for {num_of_stops_to_dest} stops. Alight at {self.dest_name}"
         self.polyline_points = self.fetch_polyline_points()
 
     def calculate_distance_list(self):
@@ -40,9 +40,7 @@ class BusRoute(Route):
         return duration_list
 
     def fetch_html_instructions(self):
-        html_instructions = []
-        for direction in self.directions_list:
-            html_instructions.append(get_html_instructions(direction))
+        html_instructions = '\n'.join([get_html_instructions(direction) for direction in self.directions_list])
         return html_instructions
 
     def fetch_polyline_points(self):

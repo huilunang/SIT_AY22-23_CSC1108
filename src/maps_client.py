@@ -160,9 +160,10 @@ def get_polyline_points(directions):
 
 def get_html_instructions(directions):
     steps = directions[0]['legs'][0]['steps']
-    instructions = []
+    instructions_list = []
     for step in steps:
-        instructions.append(f"In {step['distance']['text']}, {step['html_instructions']}")
+        instructions_list.append(f"{step['html_instructions']}, walk for {step['distance']['text']}.")
+    instructions = '\n'.join(instructions_list)
     return instructions
 
 # if __name__ == '__main__':
