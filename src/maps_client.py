@@ -7,6 +7,7 @@ import pickle
 
 import googlemaps
 
+
 class Cache:
     def __init__(self):
         self.file_path = os.path.join("cache", "cache.pickle")
@@ -15,11 +16,10 @@ class Cache:
             with open(self.file_path, "wb") as f:
                 pickle.dump({}, f)
 
-
     def cache(self, source_id: int, dest_id: int, cache_data: list) -> None:
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
-        
+
         if source_id not in data:
             data[source_id] = {}
         if dest_id not in data[source_id]:
@@ -28,11 +28,10 @@ class Cache:
             with open(self.file_path, "wb") as f:
                 pickle.dump(data, f)
 
-
     def get_cache(self, source_id: int, dest_id: int) -> bool | list:
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
-        
+
         if source_id not in data or dest_id not in data[source_id]:
             return False
         return data[source_id][dest_id]
@@ -73,12 +72,14 @@ class Directions(Client):
     def __init__(self):
         super().__init__()
 
-    def direction(self, origin: BusStop, destination: BusStop, mode: str = None,
-                  avoid: str = None, traffic: str = None, waypoints: list = None) -> list:
+    def direction(self, origin: str | BusStop, destination: str | BusStop,
+                  cache: bool = True, mode: str = None, avoid: str = None,
+                  traffic: str = None, waypoints: list = None) -> list:
         """ To get the distance, duration, waypoints (routes), and other metrics between two points
         Args:
-            origin (BusStop): Starting bus
-            destination (BusStop): Ending bus
+            origin (str) | (BusStop): Starting coordinate | bus
+            destination (str) | (BusStop): Ending coordinate | bus
+            cache (bool): Cache only for bus transiting routes
         Optional Args:
             mode (str): "driving" | "walking" | "transit" (public transport)
             avoid (str): "highway" | tolls" | "ferries"
@@ -89,39 +90,41 @@ class Directions(Client):
         Returns:
             List containing distance, duration, and other metrics between two points
         """
-        c = Cache()
-        
-        data = c.get_cache(origin.stop_id, destination.stop_id)
+        if cache:
+            c = Cache()
 
-        if data is False:
+            data = c.get_cache(origin.stop_id, destination.stop_id)
+
+            if data is False:
+                directions = self.client.directions(
+                    origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
+                    waypoints=waypoints)
+                c.cache(origin.stop_id, destination.stop_id, directions)
+
+                return directions
+            return data
+        else:
             directions = self.client.directions(
-                origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
-                waypoints=waypoints)
-            c.cache(origin.stop_id, destination.stop_id, directions)
-
+                    origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
+                    waypoints=waypoints)
             return directions
-        return data
 
 
     def get_distance(self, origin, destination):
         directions = self.direction(origin, destination)
         return directions[0]["legs"][0]["distance"]["value"]
 
-
     def get_duration(self, origin, destination):
         directions = self.direction(origin, destination)
         return directions[0]["legs"][0]["duration"]["value"]
-
 
     def get_walking_distance(self, origin, destination):
         directions = self.direction(origin, destination, mode="walking")
         return directions[0]["legs"][0]["distance"]["value"]
 
-
     def get_walking_duration(self, origin, destination):
         directions = self.direction(origin, destination, mode="walking")
         return directions[0]["legs"][0]["duration"]["value"]
-
 
     def get_cost_duration(self, origin, destination):
         directions = self.direction(origin, destination)
@@ -131,14 +134,18 @@ class Directions(Client):
 def get_distance_value(directions):
     return directions[0]["legs"][0]["distance"]["value"]
 
+
 def get_duration_value(directions):
     return directions[0]["legs"][0]["duration"]["value"]
+
 
 def get_walking_distance_from_directions(directions):
     return directions[0]["legs"][0]["distance"]["value"]
 
+
 def get_walking_duration(directions):
     return directions[0]["legs"][0]["duration"]["value"]
+
 
 def get_polyline_points(directions):
     return directions[0]['overview_polyline']['points']
