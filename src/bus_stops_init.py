@@ -52,14 +52,15 @@ def get_nearest_bus_stop(origin,bus_stops_dict):
         origin, (x["latitude"], x["longitude"])).m, axis=1)
     df = df.sort_values(by=["nearest_bus_to_user"])
 
-    df = df.iloc[:5, :] # take only top 5
+    df = df.iloc[:10, :] # take only top 10
     df.loc[:, "nearest_walk"] = df.apply(lambda x: get_walking_distance_from_directions(Directions().direction(
-        origin, (x["latitude"], x["longitude"]))), axis=1)
+        origin, (x["latitude"], x["longitude"]), mode="walking")), axis=1)
     df = df.sort_values(by=["nearest_walk"])
+    print(df)
     return bus_stops_dict[df.iloc[0]["stop_id"]]
 
 
-# bus_stops_dict = generate_bus_stops()
+bus_stops_dict = generate_bus_stops()
 # D = Directions()
-# get_nearest_bus_stop((1.4854384, 103.7628811), bus_stops_dict)
+get_nearest_bus_stop((1.4854384, 103.7628811), bus_stops_dict)
 
