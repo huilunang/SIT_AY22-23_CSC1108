@@ -83,6 +83,13 @@
         <br>
       <button id="submit-btn">Submit</button>
       </form>
+      <br>
+      {% if map_route %}
+        {{ map_route|safe }}
+      {% endif %}
+      {% if map_instructions %}
+        {{map_instructions|safe }}
+      {% endif %}
     </div>
       {% if map_div_1 %}
         {{ map_div_1|safe }}
