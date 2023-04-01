@@ -28,7 +28,9 @@ def generate_map():
 
     if request.method == "POST":
         origin = request.form.get("origin-input")
+        origin_str = origin
         destination = request.form.get("destination-input")
+        destination_str = destination
 
         # make a request to the Google Directions API
         url = f'https://maps.googleapis.com/maps/api/directions/json?origin={origin}&destination={destination}&waypoints={waypoints}&key={api_key}'
@@ -103,7 +105,7 @@ def generate_map():
             map_script_1 = map_script[0]
             map_script_2 = map_script[1]
             map_div_1 = '<div id="map_canvas"></div>'
-            map_route = f'<div id="route"><p><b>ORIGIN</b></p><p>{origin}</p><p><b>DESTINATION</b></p><p>{destination}</p></div><button id="show_directions" onclick="toggleDirections()">Click for DIRECTIONS</button>'
+            map_route = f'<div id="route"><p><b><u>ORIGIN</u></b></p><p>{origin_str}</p><p><b><u>DESTINATION</u></b></p><p>{destination_str}</p><br></div><button id="show_directions" onclick="toggleDirections()">Click for DIRECTIONS</button>'
             instructions_list = [route.instructions for route in routes]
             instruction_str = ''
             step = 1
