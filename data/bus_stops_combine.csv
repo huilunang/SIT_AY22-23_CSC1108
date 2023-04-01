@@ -1,245 +1,245 @@
-stop_id,stop_no,bus_stop,latitude,longitude,bus_svc,,,,,
-66,1,Larkin Terminal,1.496456,103.7437466,P101-loop,,,,,
-126,2,Pejabat Daerah Tanah Johor Bahru,1.491850779,103.7408726,P101-loop,,,,,
-135,3,RTM Jabatan Penyiaran Negeri Johor,1.480182318,103.7368168,P101-loop,,,,,
-96,4,Opp Masjid Kolam Ayer,1.468994056,103.736874,P101-loop,,,,,
-91,5,Opp Jabatan Pendidikan Johor,1.467551056,103.7367309,P101-loop,,,,,
-69,6,Maktab Sultan Abu Bakar (English College),1.462746651,103.7396519,P101-loop,,,,,
-49,7,Hospital Sultanah Aminah,1.457574284,103.7467068,P101-loop,,,,,
-58,8,Johor Islamic Complex,1.45674209,103.7493827,P101-loop,,,,,
-20,9,Bangunan Sultan Ibrahim,1.459833627,103.7621607,P101-loop,,,,,
-167,10,Wisma Persekutuan,1.460962056,103.7578251,P101-loop,,,,,
-68,11,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P101-loop,,,,,
-57,12,JB Sentral Terminal,1.463569159,103.7649969,P101-loop,,,,,
-73,13,Menara MSC Cyberport,1.462251514,103.7719803,P101-loop,,,,,
-109,14,Opp Sekolah Kebangsaan Perempuan Jalan Yahya Awal,1.472871297,103.7488519,P101-loop,,,,,
-129,15,Petronas Kiosk @ Jalan Yahya Awal,1.475371812,103.7479248,P101-loop,,,,,
-116,16,Opp SJK (T) Jalan Yahya Awal,1.478736857,103.7475312,P101-loop,,,,,
-12,17,aft Jalan Tasek Utara,1.481036154,103.747385,P101-loop,,,,,
-123,18,Opp Yayasan Bandaraya Johor Bahru,1.484349142,103.749253,P101-loop,,,,,
-66,19,Larkin Terminal,1.496456,103.7437466,P101-loop,,,,,
-52,1,Hub PPR Sri Stulang,1.495066779,103.7876649,P102-01,,,,,
-27,2,bef Jalan Sultanah Aminah,1.491854044,103.7852294,P102-01,,,,,
-141,3,Shell Kiosk @ Jalan Pasir Pelangi,1.490657221,103.7858711,P102-01,,,,,
-155,4,Stulang Walk,1.473219176,103.779879,P102-01,,,,,
-39,5,Block 18,1.471254352,103.7811927,P102-01,,,,,
-86,6,Opp De' Stulang,1.469458627,103.7816132,P102-01,,,,,
-112,7,Opp Sekolah Menengah Foon Yew,1.46705997,103.7788835,P102-01,,,,,
-134,8,R&F Mall,1.46041095,103.7694014,P102-01,,,,,
-68,9,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P102-01,,,,,
-68,1,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P102-02,,,,,
-57,2,JB Sentral Terminal,1.463569159,103.7649969,P102-02,,,,,
-73,3,Menara MSC Cyberport,1.462251514,103.7719803,P102-02,,,,,
-139,4,Sekolah Menengah Foon Yew,1.467619177,103.7792843,P102-02,,,,,
-42,5,De' Stulang,1.46953421,103.7816314,P102-02,,,,,
-90,6,Opp Istana Pasir Pelangi,1.478025648,103.7808711,P102-02,,,,,
-160,7,"The Mall, Mid Valley Southkey",1.50059368,103.7767902,P102-02,,,,,
-8,8,aft Jalan Pasir Pelangi,1.496199955,103.7842124,P102-02,,,,,
-130,9,Petronas Kiosk @ Taman Bayu Puteri,1.497190307,103.7895672,P102-02,,,,,
-103,10,Opp Petronas Kiosk @ Taman Bayu Puteri,1.496884261,103.7894673,P102-02,,,,,
-133,11,PPR Sri Stulang,1.495216174,103.7893029,P102-02,,,,,
-52,12,Hub PPR Sri Stulang,1.495066779,103.7876649,P102-02,,,,,
-52,1,Hub PPR Sri Stulang,1.495066779,103.7876649,P106-loop,,,,,
-8,2,aft Jalan Pasir Pelangi,1.496199955,103.7842124,P106-loop,,,,,
-130,3,Petronas Kiosk @ Taman Bayu Puteri,1.497190307,103.7895672,P106-loop,,,,,
-38,4,BHPetrol Kiosk @ Permas Jaya,1.494201088,103.8129347,P106-loop,,,,,
-1,5,AEON Permas Jaya,1.496085229,103.8196957,P106-loop,,,,,
-43,6,Dewan Serbaguna Permas Jaya,1.497724395,103.824157,P106-loop,,,,,
-74,7,Mon Glori Apartment,1.500135152,103.8221974,P106-loop,,,,,
-81,8,Opp Best Ku Motor,1.5210771,103.8206028,P106-loop,,,,,
-95,9,Opp Kia Motors,1.52631367,103.8166755,P106-loop,,,,,
-26,10,bef Jalan Masai Baru,1.523408186,103.8130061,P106-loop,,,,,
-67,11,Lotus Plentong (Tesco Extra),1.520850394,103.8151239,P106-loop,,,,,
-7,12,aft Jalan Masai Baru,1.523392807,103.8126042,P106-loop,,,,,
-45,13,Giant Plentong,1.527896401,103.8160143,P106-loop,,,,,
-51,14,Hse No. 1 Jalan Seroja 22,1.531047606,103.8145171,P106-loop,,,,,
-93,15,Opp Jalan Keembong 43,1.5333408,103.8057019,P106-loop,,,,,
-56,16,Jalan Seroja 54,1.537075525,103.7999069,P106-loop,,,,,
-53,17,Jalan Bakawali 86,1.53837925,103.7990475,P106-loop,,,,,
-99,18,Opp Pasar Awam Johor Jaya,1.544285406,103.7995218,P106-loop,,,,,
-3,19,AEON Tebrau City,1.551607288,103.7966925,P106-loop,,,,,
-47,20,Hospital Sultan Ismail,1.549961664,103.7903773,P106-loop,,,,,
-48,21,Hospital Sultan Ismail 2,1.546134799,103.7892017,P106-loop,,,,,
-119,22,Opp Suntoyo Enterprise,1.534143544,103.8043343,P106-loop,,,,,
-60,23,Kia Motors,1.526168776,103.8171042,P106-loop,,,,,
-37,24,Best Ku Motor,1.521229195,103.8208051,P106-loop,,,,,
-50,25,House No. 63 Jalan Permas 1/1,1.514826426,103.8182781,P106-loop,,,,,
-55,26,Jalan Permas 5/6,1.503823725,103.8176465,P106-loop,,,,,
-137,27,Sekolah Kebangsaan Taman Permas Jaya 3,1.500186203,103.8204709,P106-loop,,,,,
-124,28,Pan Vista,1.500133528,103.8221986,P106-loop,,,,,
-10,29,aft Jalan Permas 8/14,1.500159911,103.8258834,P106-loop,,,,,
-82,30,Opp BHPetrol Kiosk @ Permas Jaya,1.49388522,103.8131204,P106-loop,,,,,
-34,31,bef Shell Kiosk @ Permas Jaya,1.492394868,103.8049054,P106-loop,,,,,
-103,32,Opp Petronas Kiosk @ Taman Bayu Puteri,1.496884261,103.7894673,P106-loop,,,,,
-133,33,PPR Sri Stulang,1.495216174,103.7893029,P106-loop,,,,,
-52,34,Hub PPR Sri Stulang,1.495066779,103.7876649,P106-loop,,,,,
-159,1,Taman Universiti Terminal,1.538615137,103.6287189,P202-loop,,,,,
-111,2,opp Sekolah Kebangsaan Taman Universiti 4,1.534308506,103.6271094,P202-loop,,,,,
-156,3,Surau As Syakirin,1.530054057,103.6291966,P202-loop,,,,,
-117,4,Opp SMK Taman Mutiara Rini,1.5245752,103.6351756,P202-loop,,,,,
-94,5,Opp Jalan Utama 34,1.520952363,103.6382563,P202-loop,,,,,
-89,8,Opp Hutan Bandar MBIP,1.511956347,103.6346564,P202-loop,,,,,
-143,9,Shop No. 81 Jalan Seri Orkid 17,1.510192195,103.6421762,P202-loop,,,,,
-80,10,Opp Bahagian Teknologi Pendidikan Negeri Johor,1.517562517,103.6491849,P202-loop,,,,,
-162,11,Union Inn,1.515896649,103.6571949,P202-loop,,,,,
-144,12,Shophouses @ Jalan Nakhoda 2,1.517940557,103.6591197,P202-loop,,,,,
-35,13,bef Terminal TUTA,1.519763876,103.6608501,P202-loop,,,,,
-132,14,Polilkinik Yap,1.522530082,103.6633856,P202-loop,,,,,
-28,15,bef Jalan Tun Teja,1.524323669,103.6650279,P202-loop,,,,,
-145,16,Shophouses @ Jalan Perwira 9,1.527600069,103.6649068,P202-loop,,,,,
-148,17,Sin Kok Soon Motor (JB) Sdn Bhd,1.5295849,103.6652508,P202-loop,,,,,
-9,18,aft Jalan Patin,1.535051181,103.6647465,P202-loop,,,,,
-150,19,SJK(C) Pu Sze,1.5365258,103.6634375,P202-loop,,,,,
-16,20,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P202-loop,,,,,
-142,21,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P202-loop,,,,,
-70,22,Masjid Abidin,1.542973131,103.6508563,P202-loop,,,,,
-147,23,Shophouses along Jalan Tembaga Kuning 4,1.544925677,103.6527194,P202-loop,,,,,
-146,24,Shophouses @ Jalan Suasa 1,1.549647044,103.6517996,P202-loop,,,,,
-25,25,bef Jalan Hamoni 14,1.544576996,103.6439733,P202-loop,,,,,
-78,26,Opp Apartment Pasti Asli,1.541226824,103.641238,P202-loop,,,,,
-120,27,Opp Surau As Syakirin,1.529738025,103.6292826,P202-loop,,,,,
-138,28,Sekolah Kebangsaan Taman Universiti 4,1.534463375,103.6270981,P202-loop,,,,,
-54,29,Jalan Kebudayaan 27 / 24 Intersection,1.535736987,103.6281658,P202-loop,,,,,
-159,30,Taman Universiti Terminal,1.538615137,103.6287189,P202-loop,,,,,
-159,1,Taman Universiti Terminal,1.538615137,103.6287189,P211-01,,,,,
-2,2,Aeon Taman Universiti,1.542377712,103.6296989,P211-01,,,,,
-164,3,UTM Fakulti Alam Bina,1.55985955,103.6347838,P211-01,,,,,
-84,4,Opp Block D10,1.562769735,103.6364524,P211-01,,,,,
-85,5,Opp C.I.C.T.,1.562709502,103.63915,P211-01,,,,,
-40,6,Block P07 - Fakulti Kejuruteraan Elektrik,1.560459396,103.6416433,P211-01,,,,,
-4,7,aft Block P19A - Fakulti Kejuruteraan Elektrik,1.558167974,103.6402196,P211-01,,,,,
-163,8,UTM Equine Park,1.555337848,103.6410112,P211-01,,,,,
-166,9,UTM Rumah Alumni,1.553305026,103.6427118,P211-01,,,,,
-114,10,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P211-01,,,,,
-152,11,Skudai Parade,1.541540224,103.659545,P211-01,,,,,
-115,12,Opp SJK (C) Kuo Kuang,1.528201282,103.6709727,P211-01,,,,,
-31,14,bef Paradigm Mall,1.519262392,103.6820661,P211-01,,,,,
-125,15,Paradigm Mall,1.514813893,103.6852376,P211-01,,,,,
-107,16,Opp Saksama Otomobil,1.512138339,103.6870659,P211-01,,,,,
-102,17,Opp Petron Kiosk @ Taman Tampoi Indah,1.508858469,103.689289,P211-01,,,,,
-63,18,Kompleks Pekan Rabu Johor Bahru,1.500885591,103.6959931,P211-01,,,,,
-46,19,Giant Tampoi,1.49887745,103.698863,P211-01,,,,,
-14,20,aft Lorong Betik,1.496928934,103.7017996,P211-01,,,,,
-21,21,Batu 5 Johor Street Market,1.495730878,103.7035357,P211-01,,,,,
-131,22,Plaza Angsana,1.49417359,103.7057444,P211-01,,,,,
-62,23,Klinik Utama @ Jalan Padi 1,1.489587187,103.7121908,P211-01,,,,,
-77,24,Opp Amitabha Centre,1.487125506,103.7243855,P211-01,,,,,
-113,25,Opp Shell Kiosk @ Jalan Tun Abdul Razak,1.488783483,103.7276431,P211-01,,,,,
-66,26,Larkin Terminal,1.496456,103.7437466,P211-01,,,,,
-66,1,Larkin Terminal,1.496456,103.7437466,P211-02,,,,,
-126,2,Pejabat Daerah Tanah Johor Bahru,1.491728153,103.7409162,P211-02,,,,,
-17,3,aft Shell Kiosk @ Jalan Tun Abdul Razak,1.488499836,103.7276038,P211-02,,,,,
-19,4,Amitabha Centre,1.486789011,103.7242977,P211-02,,,,,
-41,5,CIMB Bank,1.48886388,103.7124206,P211-02,,,,,
-61,6,Klinik Kesihatan Tampoi,1.492529618,103.7070861,P211-02,,,,,
-33,7,bef Shell Kiosk @ Kampung Pasir,1.492532299,103.70707,P211-02,,,,,
-151,8,SK Kampung Pasir,1.498994748,103.6980313,P211-02,,,,,
-105,9,Opp Pulai View Condo,1.500912032,103.6953139,P211-02,,,,,
-29,10,bef KIP Mart,1.508215099,103.6891613,P211-02,,,,,
-98,11,Opp Paradigm Mall,1.516395251,103.6837139,P211-02,,,,,s
-30,12,bef McDonald's,1.523088988,103.6789594,P211-02,,,,,
-149,13,SJK (C) Kuo Kuang,1.528047324,103.6704627,P211-02,,,,,
-9,14,aft Jalan Patin,1.535051181,103.6647465,P211-02,,,,,
-150,15,SJK(C) Pu Sze,1.5365258,103.6634375,P211-02,,,,,
-16,16,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P211-02,,,,,
-142,17,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P211-02,,,,,
-11,18,aft Jalan Sri Skudai,1.548816799,103.6540946,P211-02,,,,,
-146,19,Shophouses @ Jalan Suasa 1,1.549760275,103.6517749,P211-02,,,,,
-164,20,UTM Fakulti Alam Bina,1.55985955,103.6347838,P211-02,,,,,
-84,21,Opp Block D10,1.562769735,103.6364524,P211-02,,,,,
-85,22,Opp C.I.C.T.,1.562709502,103.63915,P211-02,,,,,
-40,23,Block P07 - Fakulti Kejuruteraan Elektrik,1.560459396,103.6416433,P211-02,,,,,
-4,24,aft Block P19A - Fakulti Kejuruteraan Elektrik,1.558167974,103.6402196,P211-02,,,,,
-36,25,bef UTM Main Gate,1.556866974,103.6380134,P211-02,,,,,
-165,26,UTM Main Gate (Exit),1.55677431,103.6372984,P211-02,,,,,
-76,27,Opp AEON Taman Universiti,1.541918725,103.6297157,P211-02,,,,,
-159,28,Taman Universiti Terminal,1.538615137,103.6287189,P211-02,,,,,
-44,1,Econsave Senai,1.611006845,103.6562933,P403-loop,,,,,
-106,2,Opp Pusat Hemodialisis Rotary Kulai,1.612501318,103.6581689,P403-loop,,,,,
-121,3,Opp Taman Bintang,1.614542434,103.658532,P403-loop,,,,,
-59,4,Kawasan Perindustrian Senai 3,1.626134397,103.6563151,P403-loop,,,,,
-140,5,Senai Airport Terminal,1.634937925,103.6663069,P403-loop,,,,,
-75,6,NSTP Senai,1.628397694,103.6568982,P403-loop,,,,,
-157,7,Taman Bintang,1.615570955,103.6588309,P403-loop,,,,,
-158,8,Taman Mewah,1.609340971,103.6568208,P403-loop,,,,,
-72,9,Medan Selera Senai,1.601384609,103.6451568,P403-loop,,,,,
-110,10,Opp Sekolah Kebangsaan Senai,1.596764421,103.645591,P403-loop,,,,,
-83,11,Opp BHPetrol Kiosk @ Taman Aman,1.591021565,103.6479669,P403-loop,,,,,
-13,12,aft Lebuhraya Utara-Selatan,1.571068289,103.6609401,P403-loop,,,,,
-114,13,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P403-loop,,,,,
-152,14,Skudai Parade,1.541540224,103.659545,P403-loop,,,,,
-9,15,aft Jalan Patin,1.535051181,103.6647465,P403-loop,,,,,
-150,16,SJK(C) Pu Sze,1.5365258,103.6634375,P403-loop,,,,,
-16,17,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P403-loop,,,,,
-142,18,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P403-loop,,,,,
-18,19,aft Tenaga Nasional Bhd Substation,1.554106991,103.6585325,P403-loop,,,,,
-22,20,bef BHPetrol Kiosk @ Taman Aman,1.590696275,103.6477011,P403-loop,,,,,
-32,21,bef Sekolah Kebangsaan Senai,1.595899319,103.645369,P403-loop,,,,,
-97,22,Opp Medan Selera Senai,1.600263406,103.6445932,P403-loop,,,,,
-23,23,bef Econsave @ Senai,1.61020106,103.6571529,P403-loop,,,,,
-44,24,Econsave Senai,1.611006845,103.6562933,P403-loop,,,,,
-65,1,Kulai Terminal,1.662682805,103.5988911,P411-01,,,,,
-64,2,Kulai Centre Point,1.661364287,103.6037274,P411-01,,,,,
-108,3,Opp SBS Enterprises (M) Sdn Bhd,1.654174485,103.6097104,P411-01,,,,,
-104,4,Opp Public Bank @ Jalan Susur Kulai 2,1.650930433,103.6114855,P411-01,,,,,
-101,5,Opp Pertubuhan Peladang Kawasan Kulai,1.645258022,103.6164964,P411-01,,,,,
-88,6,Opp Hospital Temenggong Seri Maharaja Tun Ibrahim Kulaijaya,1.639820913,103.6246646,P411-01,,,,,
-92,7,Opp Jalan Cermai,1.635949316,103.6299317,P411-01,,,,,
-118,8,Opp Stor JKR (D) Kulaijaya,1.633014316,103.6334982,P411-01,,,,,
-122,9,Opp Wang Loo Motor Sdn Bhd,1.628655063,103.6380771,P411-01,,,,,
-100,10,Opp Pejabat Lembaga Lebuhraya Malaysia,1.620372317,103.6461494,P411-01,,,,,
-72,11,Medan Selera Senai,1.601384609,103.6451568,P411-01,,,,,
-110,12,Opp Sekolah Kebangsaan Senai,1.596764421,103.645591,P411-01,,,,,
-83,13,Opp BHPetrol Kiosk @ Taman Aman,1.591021565,103.6479669,P411-01,,,,,
-13,14,aft Lebuhraya Utara-Selatan,1.571068289,103.6609401,P411-01,,,,,
-114,15,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P411-01,,,,,
-152,16,Skudai Parade,1.541540224,103.659545,P411-01,,,,,
-115,17,Opp SJK (C) Kuo Kuang,1.528201282,103.6709727,P411-01,,,,,
-31,19,bef Paradigm Mall,1.519262392,103.6820661,P411-01,,,,,
-125,20,Paradigm Mall,1.514813893,103.6852376,P411-01,,,,,
-107,21,Opp Saksama Otomobil,1.512138339,103.6870659,P411-01,,,,,
-102,22,Opp Petron Kiosk @ Taman Tampoi Indah,1.508858469,103.689289,P411-01,,,,,
-63,23,Kompleks Pekan Rabu Johor Bahru,1.500885591,103.6959931,P411-01,,,,,
-46,24,Giant Tampoi,1.49887745,103.698863,P411-01,,,,,
-14,25,aft Lorong Betik,1.496928934,103.7017996,P411-01,,,,,
-21,26,Batu 5 Johor Street Market,1.495730878,103.7035357,P411-01,,,,,
-131,27,Plaza Angsana,1.49417359,103.7057444,P411-01,,,,,
-62,28,Klinik Utama @ Jalan Padi 1,1.489587187,103.7121908,P411-01,,,,,
-77,29,Opp Amitabha Centre,1.487125506,103.7243855,P411-01,,,,,
-113,30,Opp Shell Kiosk @ Jalan Tun Abdul Razak,1.488783483,103.7276431,P411-01,,,,,
-66,31,Larkin Terminal,1.496456,103.7437466,P411-01,,,,,
-66,1,Larkin Terminal,1.496456,103.7437466,P411-02,,,,,
-126,2,Pejabat Daerah Tanah Johor Bahru,1.491728153,103.7409162,P411-02,,,,,
-17,3,aft Shell Kiosk @ Jalan Tun Abdul Razak,1.488499836,103.7276038,P411-02,,,,,
-19,4,Amitabha Centre,1.486789011,103.7242977,P411-02,,,,,
-41,5,CIMB Bank,1.48886388,103.7124206,P411-02,,,,,
-61,6,Klinik Kesihatan Tampoi,1.492529618,103.7070861,P411-02,,,,,
-33,7,bef Shell Kiosk @ Kampung Pasir,1.492532299,103.70707,P411-02,,,,,
-151,8,SK Kampung Pasir,1.498994748,103.6980313,P411-02,,,,,
-105,9,Opp Pulai View Condo,1.500912032,103.6953139,P411-02,,,,,
-29,10,bef KIP Mart,1.508215099,103.6891613,P411-02,,,,,
-98,11,Opp Paradigm Mall,1.516395251,103.6837139,P411-02,,,,,
-30,12,bef McDonald's,1.523088988,103.6789594,P411-02,,,,,
-149,13,SJK (C) Kuo Kuang,1.528047324,103.6704627,P411-02,,,,,
-9,14,aft Jalan Patin,1.535051181,103.6647465,P411-02,,,,,
-150,15,SJK(C) Pu Sze,1.5365258,103.6634375,P411-02,,,,,
-16,16,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P411-02,,,,,
-142,17,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P411-02,,,,,
-18,18,aft Tenaga Nasional Bhd Substation,1.554106991,103.6585325,P411-02,,,,,
-22,19,bef BHPetrol Kiosk @ Taman Aman,1.590696275,103.6477011,P411-02,,,,,
-32,20,bef Sekolah Kebangsaan Senai,1.595899319,103.645369,P411-02,,,,,
-97,21,Opp Medan Selera Senai,1.600263406,103.6445932,P411-02,,,,,
-71,22,Masjid Jamek Pekan Senai,1.605936594,103.6476148,P411-02,,,,,
-87,23,Opp Deway Motor Trading,1.613199199,103.6471074,P411-02,,,,,
-127,24,Pejabat Lembaga Lebuhraya Malaysia,1.620788215,103.645523,P411-02,,,,,
-6,25,aft Jalan Kelah,1.629596245,103.6369552,P411-02,,,,,
-154,26,Stor JKR (D) Kulaijaya,1.632670873,103.6333921,P411-02,,,,,
-161,27,TJ Mart,1.633597143,103.6324174,P411-02,,,,,
-5,28,aft Jalan Cermai 7,1.635335031,103.6300445,P411-02,,,,,
-24,29,bef Hospital Temenggong Seri Maharaja Tun Ibrahim Kulaijaya,1.63960104,103.6247465,P411-02,,,,,
-153,30,SMK Kulai Besar,1.645591346,103.6157221,P411-02,,,,,
-15,31,aft Persiaran Indahpura 4,1.647680417,103.6136131,P411-02,,,,,
-128,32,Persatuan Hokkien Kulai,1.651406693,103.6108617,P411-02,,,,,
-136,33,SBS Enterprises (M) Sdn Bhd,1.654333045,103.6095021,P411-02,,,,,
-79,34,Opp Arked Kulai,1.660899449,103.6042258,P411-02,,,,,
-65,35,Kulai Terminal,1.662682805,103.5988911,P411-02,,,,,
+stop_id,stop_no,bus_stop,latitude,longitude,bus_svc
+66,1,Larkin Terminal,1.496456,103.7437466,P101-loop
+126,2,Pejabat Daerah Tanah Johor Bahru,1.491850779,103.7408726,P101-loop
+135,3,RTM Jabatan Penyiaran Negeri Johor,1.480182318,103.7368168,P101-loop
+96,4,Opp Masjid Kolam Ayer,1.468994056,103.736874,P101-loop
+91,5,Opp Jabatan Pendidikan Johor,1.467551056,103.7367309,P101-loop
+69,6,Maktab Sultan Abu Bakar (English College),1.462746651,103.7396519,P101-loop
+49,7,Hospital Sultanah Aminah,1.457574284,103.7467068,P101-loop
+58,8,Johor Islamic Complex,1.45674209,103.7493827,P101-loop
+20,9,Bangunan Sultan Ibrahim,1.459833627,103.7621607,P101-loop
+167,10,Wisma Persekutuan,1.460962056,103.7578251,P101-loop
+68,11,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P101-loop
+57,12,JB Sentral Terminal,1.463569159,103.7649969,P101-loop
+73,13,Menara MSC Cyberport,1.462251514,103.7719803,P101-loop
+109,14,Opp Sekolah Kebangsaan Perempuan Jalan Yahya Awal,1.472871297,103.7488519,P101-loop
+129,15,Petronas Kiosk @ Jalan Yahya Awal,1.475371812,103.7479248,P101-loop
+116,16,Opp SJK (T) Jalan Yahya Awal,1.478736857,103.7475312,P101-loop
+12,17,aft Jalan Tasek Utara,1.481036154,103.747385,P101-loop
+123,18,Opp Yayasan Bandaraya Johor Bahru,1.484349142,103.749253,P101-loop
+66,19,Larkin Terminal,1.496456,103.7437466,P101-loop
+52,1,Hub PPR Sri Stulang,1.495066779,103.7876649,P102-01
+27,2,bef Jalan Sultanah Aminah,1.491854044,103.7852294,P102-01
+141,3,Shell Kiosk @ Jalan Pasir Pelangi,1.490657221,103.7858711,P102-01
+155,4,Stulang Walk,1.473219176,103.779879,P102-01
+39,5,Block 18,1.471254352,103.7811927,P102-01
+86,6,Opp De' Stulang,1.469458627,103.7816132,P102-01
+112,7,Opp Sekolah Menengah Foon Yew,1.46705997,103.7788835,P102-01
+134,8,R&F Mall,1.46041095,103.7694014,P102-01
+68,9,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P102-01
+68,1,Majlis Bandaraya Johor Bahru,1.455598539,103.7617688,P102-02
+57,2,JB Sentral Terminal,1.463569159,103.7649969,P102-02
+73,3,Menara MSC Cyberport,1.462251514,103.7719803,P102-02
+139,4,Sekolah Menengah Foon Yew,1.467619177,103.7792843,P102-02
+42,5,De' Stulang,1.46953421,103.7816314,P102-02
+90,6,Opp Istana Pasir Pelangi,1.478025648,103.7808711,P102-02
+160,7,"The Mall, Mid Valley Southkey",1.50059368,103.7767902,P102-02
+8,8,aft Jalan Pasir Pelangi,1.496199955,103.7842124,P102-02
+130,9,Petronas Kiosk @ Taman Bayu Puteri,1.497190307,103.7895672,P102-02
+103,10,Opp Petronas Kiosk @ Taman Bayu Puteri,1.496884261,103.7894673,P102-02
+133,11,PPR Sri Stulang,1.495216174,103.7893029,P102-02
+52,12,Hub PPR Sri Stulang,1.495066779,103.7876649,P102-02
+52,1,Hub PPR Sri Stulang,1.495066779,103.7876649,P106-loop
+8,2,aft Jalan Pasir Pelangi,1.496199955,103.7842124,P106-loop
+130,3,Petronas Kiosk @ Taman Bayu Puteri,1.497190307,103.7895672,P106-loop
+38,4,BHPetrol Kiosk @ Permas Jaya,1.494201088,103.8129347,P106-loop
+1,5,AEON Permas Jaya,1.496085229,103.8196957,P106-loop
+43,6,Dewan Serbaguna Permas Jaya,1.497724395,103.824157,P106-loop
+74,7,Mon Glori Apartment,1.500135152,103.8221974,P106-loop
+81,8,Opp Best Ku Motor,1.5210771,103.8206028,P106-loop
+95,9,Opp Kia Motors,1.52631367,103.8166755,P106-loop
+26,10,bef Jalan Masai Baru,1.523408186,103.8130061,P106-loop
+67,11,Lotus Plentong (Tesco Extra),1.520850394,103.8151239,P106-loop
+7,12,aft Jalan Masai Baru,1.523392807,103.8126042,P106-loop
+45,13,Giant Plentong,1.527896401,103.8160143,P106-loop
+51,14,Hse No. 1 Jalan Seroja 22,1.531047606,103.8145171,P106-loop
+93,15,Opp Jalan Keembong 43,1.5333408,103.8057019,P106-loop
+56,16,Jalan Seroja 54,1.537075525,103.7999069,P106-loop
+53,17,Jalan Bakawali 86,1.53837925,103.7990475,P106-loop
+99,18,Opp Pasar Awam Johor Jaya,1.544285406,103.7995218,P106-loop
+3,19,AEON Tebrau City,1.551607288,103.7966925,P106-loop
+47,20,Hospital Sultan Ismail,1.549961664,103.7903773,P106-loop
+48,21,Hospital Sultan Ismail 2,1.546134799,103.7892017,P106-loop
+119,22,Opp Suntoyo Enterprise,1.534143544,103.8043343,P106-loop
+60,23,Kia Motors,1.526168776,103.8171042,P106-loop
+37,24,Best Ku Motor,1.521229195,103.8208051,P106-loop
+50,25,House No. 63 Jalan Permas 1/1,1.514826426,103.8182781,P106-loop
+55,26,Jalan Permas 5/6,1.503823725,103.8176465,P106-loop
+137,27,Sekolah Kebangsaan Taman Permas Jaya 3,1.500186203,103.8204709,P106-loop
+124,28,Pan Vista,1.500133528,103.8221986,P106-loop
+10,29,aft Jalan Permas 8/14,1.500159911,103.8258834,P106-loop
+82,30,Opp BHPetrol Kiosk @ Permas Jaya,1.49388522,103.8131204,P106-loop
+34,31,bef Shell Kiosk @ Permas Jaya,1.492394868,103.8049054,P106-loop
+103,32,Opp Petronas Kiosk @ Taman Bayu Puteri,1.496884261,103.7894673,P106-loop
+133,33,PPR Sri Stulang,1.495216174,103.7893029,P106-loop
+52,34,Hub PPR Sri Stulang,1.495066779,103.7876649,P106-loop
+159,1,Taman Universiti Terminal,1.538615137,103.6287189,P202-loop
+111,2,opp Sekolah Kebangsaan Taman Universiti 4,1.534308506,103.6271094,P202-loop
+156,3,Surau As Syakirin,1.530054057,103.6291966,P202-loop
+117,4,Opp SMK Taman Mutiara Rini,1.5245752,103.6351756,P202-loop
+94,5,Opp Jalan Utama 34,1.520952363,103.6382563,P202-loop
+89,8,Opp Hutan Bandar MBIP,1.511956347,103.6346564,P202-loop
+143,9,Shop No. 81 Jalan Seri Orkid 17,1.510192195,103.6421762,P202-loop
+80,10,Opp Bahagian Teknologi Pendidikan Negeri Johor,1.517562517,103.6491849,P202-loop
+162,11,Union Inn,1.515896649,103.6571949,P202-loop
+144,12,Shophouses @ Jalan Nakhoda 2,1.517940557,103.6591197,P202-loop
+35,13,bef Terminal TUTA,1.519763876,103.6608501,P202-loop
+132,14,Polilkinik Yap,1.522530082,103.6633856,P202-loop
+28,15,bef Jalan Tun Teja,1.524323669,103.6650279,P202-loop
+145,16,Shophouses @ Jalan Perwira 9,1.527600069,103.6649068,P202-loop
+148,17,Sin Kok Soon Motor (JB) Sdn Bhd,1.5295849,103.6652508,P202-loop
+9,18,aft Jalan Patin,1.535051181,103.6647465,P202-loop
+150,19,SJK(C) Pu Sze,1.5365258,103.6634375,P202-loop
+16,20,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P202-loop
+142,21,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P202-loop
+70,22,Masjid Abidin,1.542973131,103.6508563,P202-loop
+147,23,Shophouses along Jalan Tembaga Kuning 4,1.544925677,103.6527194,P202-loop
+146,24,Shophouses @ Jalan Suasa 1,1.549647044,103.6517996,P202-loop
+25,25,bef Jalan Hamoni 14,1.544576996,103.6439733,P202-loop
+78,26,Opp Apartment Pasti Asli,1.541226824,103.641238,P202-loop
+120,27,Opp Surau As Syakirin,1.529738025,103.6292826,P202-loop
+138,28,Sekolah Kebangsaan Taman Universiti 4,1.534463375,103.6270981,P202-loop
+54,29,Jalan Kebudayaan 27 / 24 Intersection,1.535736987,103.6281658,P202-loop
+159,30,Taman Universiti Terminal,1.538615137,103.6287189,P202-loop
+159,1,Taman Universiti Terminal,1.538615137,103.6287189,P211-01
+2,2,Aeon Taman Universiti,1.542377712,103.6296989,P211-01
+164,3,UTM Fakulti Alam Bina,1.55985955,103.6347838,P211-01
+84,4,Opp Block D10,1.562769735,103.6364524,P211-01
+85,5,Opp C.I.C.T.,1.562709502,103.63915,P211-01
+40,6,Block P07 - Fakulti Kejuruteraan Elektrik,1.560459396,103.6416433,P211-01
+4,7,aft Block P19A - Fakulti Kejuruteraan Elektrik,1.558167974,103.6402196,P211-01
+163,8,UTM Equine Park,1.555337848,103.6410112,P211-01
+166,9,UTM Rumah Alumni,1.553305026,103.6427118,P211-01
+114,10,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P211-01
+152,11,Skudai Parade,1.541540224,103.659545,P211-01
+115,12,Opp SJK (C) Kuo Kuang,1.528201282,103.6709727,P211-01
+31,14,bef Paradigm Mall,1.519262392,103.6820661,P211-01
+125,15,Paradigm Mall,1.514813893,103.6852376,P211-01
+107,16,Opp Saksama Otomobil,1.512138339,103.6870659,P211-01
+102,17,Opp Petron Kiosk @ Taman Tampoi Indah,1.508858469,103.689289,P211-01
+63,18,Kompleks Pekan Rabu Johor Bahru,1.500885591,103.6959931,P211-01
+46,19,Giant Tampoi,1.49887745,103.698863,P211-01
+14,20,aft Lorong Betik,1.496928934,103.7017996,P211-01
+21,21,Batu 5 Johor Street Market,1.495730878,103.7035357,P211-01
+131,22,Plaza Angsana,1.49417359,103.7057444,P211-01
+62,23,Klinik Utama @ Jalan Padi 1,1.489587187,103.7121908,P211-01
+77,24,Opp Amitabha Centre,1.487125506,103.7243855,P211-01
+113,25,Opp Shell Kiosk @ Jalan Tun Abdul Razak,1.488783483,103.7276431,P211-01
+66,26,Larkin Terminal,1.496456,103.7437466,P211-01
+66,1,Larkin Terminal,1.496456,103.7437466,P211-02
+126,2,Pejabat Daerah Tanah Johor Bahru,1.491728153,103.7409162,P211-02
+17,3,aft Shell Kiosk @ Jalan Tun Abdul Razak,1.488499836,103.7276038,P211-02
+19,4,Amitabha Centre,1.486789011,103.7242977,P211-02
+41,5,CIMB Bank,1.48886388,103.7124206,P211-02
+61,6,Klinik Kesihatan Tampoi,1.492529618,103.7070861,P211-02
+33,7,bef Shell Kiosk @ Kampung Pasir,1.492532299,103.70707,P211-02
+151,8,SK Kampung Pasir,1.498994748,103.6980313,P211-02
+105,9,Opp Pulai View Condo,1.500912032,103.6953139,P211-02
+29,10,bef KIP Mart,1.508215099,103.6891613,P211-02
+98,11,Opp Paradigm Mall,1.516395251,103.6837139,P211-02s
+30,12,bef McDonald's,1.523088988,103.6789594,P211-02
+149,13,SJK (C) Kuo Kuang,1.528047324,103.6704627,P211-02
+9,14,aft Jalan Patin,1.535051181,103.6647465,P211-02
+150,15,SJK(C) Pu Sze,1.5365258,103.6634375,P211-02
+16,16,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P211-02
+142,17,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P211-02
+11,18,aft Jalan Sri Skudai,1.548816799,103.6540946,P211-02
+146,19,Shophouses @ Jalan Suasa 1,1.549760275,103.6517749,P211-02
+164,20,UTM Fakulti Alam Bina,1.55985955,103.6347838,P211-02
+84,21,Opp Block D10,1.562769735,103.6364524,P211-02
+85,22,Opp C.I.C.T.,1.562709502,103.63915,P211-02
+40,23,Block P07 - Fakulti Kejuruteraan Elektrik,1.560459396,103.6416433,P211-02
+4,24,aft Block P19A - Fakulti Kejuruteraan Elektrik,1.558167974,103.6402196,P211-02
+36,25,bef UTM Main Gate,1.556866974,103.6380134,P211-02
+165,26,UTM Main Gate (Exit),1.55677431,103.6372984,P211-02
+76,27,Opp AEON Taman Universiti,1.541918725,103.6297157,P211-02
+159,28,Taman Universiti Terminal,1.538615137,103.6287189,P211-02
+44,1,Econsave Senai,1.611006845,103.6562933,P403-loop
+106,2,Opp Pusat Hemodialisis Rotary Kulai,1.612501318,103.6581689,P403-loop
+121,3,Opp Taman Bintang,1.614542434,103.658532,P403-loop
+59,4,Kawasan Perindustrian Senai 3,1.626134397,103.6563151,P403-loop
+140,5,Senai Airport Terminal,1.634937925,103.6663069,P403-loop
+75,6,NSTP Senai,1.628397694,103.6568982,P403-loop
+157,7,Taman Bintang,1.615570955,103.6588309,P403-loop
+158,8,Taman Mewah,1.609340971,103.6568208,P403-loop
+72,9,Medan Selera Senai,1.601384609,103.6451568,P403-loop
+110,10,Opp Sekolah Kebangsaan Senai,1.596764421,103.645591,P403-loop
+83,11,Opp BHPetrol Kiosk @ Taman Aman,1.591021565,103.6479669,P403-loop
+13,12,aft Lebuhraya Utara-Selatan,1.571068289,103.6609401,P403-loop
+114,13,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P403-loop
+152,14,Skudai Parade,1.541540224,103.659545,P403-loop
+9,15,aft Jalan Patin,1.535051181,103.6647465,P403-loop
+150,16,SJK(C) Pu Sze,1.5365258,103.6634375,P403-loop
+16,17,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P403-loop
+142,18,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P403-loop
+18,19,aft Tenaga Nasional Bhd Substation,1.554106991,103.6585325,P403-loop
+22,20,bef BHPetrol Kiosk @ Taman Aman,1.590696275,103.6477011,P403-loop
+32,21,bef Sekolah Kebangsaan Senai,1.595899319,103.645369,P403-loop
+97,22,Opp Medan Selera Senai,1.600263406,103.6445932,P403-loop
+23,23,bef Econsave @ Senai,1.61020106,103.6571529,P403-loop
+44,24,Econsave Senai,1.611006845,103.6562933,P403-loop
+65,1,Kulai Terminal,1.662682805,103.5988911,P411-01
+64,2,Kulai Centre Point,1.661364287,103.6037274,P411-01
+108,3,Opp SBS Enterprises (M) Sdn Bhd,1.654174485,103.6097104,P411-01
+104,4,Opp Public Bank @ Jalan Susur Kulai 2,1.650930433,103.6114855,P411-01
+101,5,Opp Pertubuhan Peladang Kawasan Kulai,1.645258022,103.6164964,P411-01
+88,6,Opp Hospital Temenggong Seri Maharaja Tun Ibrahim Kulaijaya,1.639820913,103.6246646,P411-01
+92,7,Opp Jalan Cermai,1.635949316,103.6299317,P411-01
+118,8,Opp Stor JKR (D) Kulaijaya,1.633014316,103.6334982,P411-01
+122,9,Opp Wang Loo Motor Sdn Bhd,1.628655063,103.6380771,P411-01
+100,10,Opp Pejabat Lembaga Lebuhraya Malaysia,1.620372317,103.6461494,P411-01
+72,11,Medan Selera Senai,1.601384609,103.6451568,P411-01
+110,12,Opp Sekolah Kebangsaan Senai,1.596764421,103.645591,P411-01
+83,13,Opp BHPetrol Kiosk @ Taman Aman,1.591021565,103.6479669,P411-01
+13,14,aft Lebuhraya Utara-Selatan,1.571068289,103.6609401,P411-01
+114,15,Opp Shell Kiosk @ Taman Sri Putri,1.544607113,103.6577821,P411-01
+152,16,Skudai Parade,1.541540224,103.659545,P411-01
+115,17,Opp SJK (C) Kuo Kuang,1.528201282,103.6709727,P411-01
+31,19,bef Paradigm Mall,1.519262392,103.6820661,P411-01
+125,20,Paradigm Mall,1.514813893,103.6852376,P411-01
+107,21,Opp Saksama Otomobil,1.512138339,103.6870659,P411-01
+102,22,Opp Petron Kiosk @ Taman Tampoi Indah,1.508858469,103.689289,P411-01
+63,23,Kompleks Pekan Rabu Johor Bahru,1.500885591,103.6959931,P411-01
+46,24,Giant Tampoi,1.49887745,103.698863,P411-01
+14,25,aft Lorong Betik,1.496928934,103.7017996,P411-01
+21,26,Batu 5 Johor Street Market,1.495730878,103.7035357,P411-01
+131,27,Plaza Angsana,1.49417359,103.7057444,P411-01
+62,28,Klinik Utama @ Jalan Padi 1,1.489587187,103.7121908,P411-01
+77,29,Opp Amitabha Centre,1.487125506,103.7243855,P411-01
+113,30,Opp Shell Kiosk @ Jalan Tun Abdul Razak,1.488783483,103.7276431,P411-01
+66,31,Larkin Terminal,1.496456,103.7437466,P411-01
+66,1,Larkin Terminal,1.496456,103.7437466,P411-02
+126,2,Pejabat Daerah Tanah Johor Bahru,1.491728153,103.7409162,P411-02
+17,3,aft Shell Kiosk @ Jalan Tun Abdul Razak,1.488499836,103.7276038,P411-02
+19,4,Amitabha Centre,1.486789011,103.7242977,P411-02
+41,5,CIMB Bank,1.48886388,103.7124206,P411-02
+61,6,Klinik Kesihatan Tampoi,1.492529618,103.7070861,P411-02
+33,7,bef Shell Kiosk @ Kampung Pasir,1.492532299,103.70707,P411-02
+151,8,SK Kampung Pasir,1.498994748,103.6980313,P411-02
+105,9,Opp Pulai View Condo,1.500912032,103.6953139,P411-02
+29,10,bef KIP Mart,1.508215099,103.6891613,P411-02
+98,11,Opp Paradigm Mall,1.516395251,103.6837139,P411-02
+30,12,bef McDonald's,1.523088988,103.6789594,P411-02
+149,13,SJK (C) Kuo Kuang,1.528047324,103.6704627,P411-02
+9,14,aft Jalan Patin,1.535051181,103.6647465,P411-02
+150,15,SJK(C) Pu Sze,1.5365258,103.6634375,P411-02
+16,16,aft Shell Kiosk - Skudai,1.539724725,103.6605013,P411-02
+142,17,Shell Kiosk @ Taman Sri Putri,1.544903437,103.6572748,P411-02
+18,18,aft Tenaga Nasional Bhd Substation,1.554106991,103.6585325,P411-02
+22,19,bef BHPetrol Kiosk @ Taman Aman,1.590696275,103.6477011,P411-02
+32,20,bef Sekolah Kebangsaan Senai,1.595899319,103.645369,P411-02
+97,21,Opp Medan Selera Senai,1.600263406,103.6445932,P411-02
+71,22,Masjid Jamek Pekan Senai,1.605936594,103.6476148,P411-02
+87,23,Opp Deway Motor Trading,1.613199199,103.6471074,P411-02
+127,24,Pejabat Lembaga Lebuhraya Malaysia,1.620788215,103.645523,P411-02
+6,25,aft Jalan Kelah,1.629596245,103.6369552,P411-02
+154,26,Stor JKR (D) Kulaijaya,1.632670873,103.6333921,P411-02
+161,27,TJ Mart,1.633597143,103.6324174,P411-02
+5,28,aft Jalan Cermai 7,1.635335031,103.6300445,P411-02
+24,29,bef Hospital Temenggong Seri Maharaja Tun Ibrahim Kulaijaya,1.63960104,103.6247465,P411-02
+153,30,SMK Kulai Besar,1.645591346,103.6157221,P411-02
+15,31,aft Persiaran Indahpura 4,1.647680417,103.6136131,P411-02
+128,32,Persatuan Hokkien Kulai,1.651406693,103.6108617,P411-02
+136,33,SBS Enterprises (M) Sdn Bhd,1.654333045,103.6095021,P411-02
+79,34,Opp Arked Kulai,1.660899449,103.6042258,P411-02
+65,35,Kulai Terminal,1.662682805,103.5988911,P411-02
