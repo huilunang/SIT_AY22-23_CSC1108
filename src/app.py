@@ -38,17 +38,26 @@ def generate_map():
             gmap = gmplot.GoogleMapPlotter(float(origin_list[0]), float(origin_list[1]), apikey=api_key, zoom=13)
             gmap.marker(float(origin_list[0]), float(origin_list[1]), color="green", label="S")
         else:
-            gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key, zoom=13)
-            origin = gmplot.GoogleMapPlotter.geocode(origin, apikey=api_key)
-            gmap.marker(float(origin[0]), float(origin[1]), color="green", label="S")
+            try:
+                gmap = gmplot.GoogleMapPlotter.from_geocode(origin, apikey=api_key, zoom=13)
+                origin = gmplot.GoogleMapPlotter.geocode(origin, apikey=api_key)
+                gmap.marker(float(origin[0]), float(origin[1]), color="green", label="S")
+            except IndexError:
+
+                pass
+                # TODO : @KY : handle error
 
         if ',' in destination:
             destination_list = destination.split(",")
             gmap.marker(float(destination_list[0]), float(destination_list[1]), color="red", label="D")
 
         else:
-            destination = gmplot.GoogleMapPlotter.geocode(destination, apikey=api_key)
-            gmap.marker(float(destination[0]), float(destination[1]), color="red", label="D")
+            try:
+                destination = gmplot.GoogleMapPlotter.geocode(destination, apikey=api_key)
+                gmap.marker(float(destination[0]), float(destination[1]), color="red", label="D")
+            except IndexError:
+                pass
+                # TODO : @KY : handle error
 
         # extract the polyline points and decode them into latitude/longitude coordinates
 
