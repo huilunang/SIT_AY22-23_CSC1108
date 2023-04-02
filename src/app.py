@@ -45,7 +45,6 @@ def generate_map():
                 gmap.marker(float(origin[0]), float(origin[1]), color="green", label="S")
             except IndexError:
 
-                # TODO : @KY : handle error
                 error_msg = "Please enter a valid geocode or coordinate"
                 gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key, zoom=13)
                 map_html = gmap.get()
@@ -70,7 +69,6 @@ def generate_map():
                 gmap.marker(float(destination[0]), float(destination[1]), color="red", label="D")
             except IndexError:
 
-                # TODO : @KY : handle error
                 error_msg = "Please enter a valid geocode or coordinate"
                 gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key, zoom=13)
                 map_html = gmap.get()
