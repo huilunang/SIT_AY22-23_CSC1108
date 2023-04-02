@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39ed43ea-f7ad-48b6-8a92-47144bf1f70b" name="Changes" comment="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol">
-      <change afterPath="$PROJECT_DIR$/cache/path_cache.pickle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/preload_cache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/cache.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/cache/cache.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/aStarAlgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/aStarAlgo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classes/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Classes/Node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bus_stops_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bus_stops_init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/maps_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/maps_client.py" afterDir="false" />
-    </list>
+    <list default="true" id="39ed43ea-f7ad-48b6-8a92-47144bf1f70b" name="Changes" comment="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,6 +87,14 @@
       <option name="presentableId" value="Default" />
       <updated>1679836793727</updated>
     </task>
+    <task id="LOCAL-00001" summary="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol">
+      <created>1680401085931</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680401085931</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="UnknownFeatures">
