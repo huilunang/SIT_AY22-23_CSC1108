@@ -87,17 +87,9 @@ if __name__ == '__main__':
     start_coords = (1.461799, 103.7639603)
     end_coords = (1.4854384, 103.7628811)
 
-    # start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
-    # end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
-    start_bus_stop = bus_stops_dict[145]
-    end_bus_stop = bus_stops_dict[66]
+    start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
+    end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
 
-    # path = path_cache.get_path(start_bus_stop.stop_id, end_bus_stop.stop_id)
-    # if path:
-    #     print("path found in cache")
-    #
-    # else:
-    #     print("path not found in cache")
     routes = []
     node_result = aStar(start_bus_stop, end_bus_stop, bus_stops_dict)
     path = get_path(node_result)
