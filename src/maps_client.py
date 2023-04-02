@@ -1,22 +1,24 @@
 from __future__ import annotations
 
-from Classes.BusStop import BusStop
-
 import os
 import pickle
-
+import sys
 import googlemaps
+from src.Classes.BusStop import BusStop
 
 
 class Cache:
-    def __init__(self):
-        self.file_path = os.path.join("..\\cache", "cache.pickle")
+    def __init__(self, file_path=os.path.join("..\\cache", "cache.pickle")):
+        self.file_path = file_path
 
         if not os.path.exists(self.file_path):
             with open(self.file_path, "wb") as f:
                 pickle.dump({}, f)
 
     def cache(self, source_id: int, dest_id: int, cache_data: list, mode: str) -> None:
+        if sys.getsizeof(cache_data) >= 4096:
+            return None
+
         with open(self.file_path, "rb") as f:
             data = pickle.load(f)
 
@@ -41,6 +43,25 @@ class Cache:
         elif mode not in data[source_id][dest_id]:
             return False
         return data[source_id][dest_id][mode]
+
+    def cache_path(self, source_id: int, dest_id: int, path) -> None:
+        with open(self.file_path, "rb") as f:
+            data = pickle.load(f)
+        if source_id not in data:
+            data[source_id] = {}
+        if dest_id not in data[source_id]:
+            data[source_id][dest_id] = path
+            with open(self.file_path, "wb") as f:
+                pickle.dump(data, f)
+
+    def get_path(self, source_id, dest_id) -> bool | list:
+        with open(self.file_path, "rb") as f:
+            data = pickle.load(f)
+            if source_id in data:
+                if dest_id in data[source_id]:
+                    return data[source_id][dest_id]
+        return False
+
 
 
 class Client:
@@ -96,28 +117,27 @@ class Directions(Client):
         Returns:
             List containing distance, duration, and other metrics between two points
         """
+
+        if cache:
+            c = Cache()
+            data = c.get_cache(origin.stop_id, destination.stop_id, mode)
+            if data:
+                return data
+            else:
+                directions = self.client.directions(
+                    origin.coords, destination.coords, mode=mode, avoid=avoid, traffic_model=traffic,
+                    waypoints=waypoints)
+                c.cache(origin.stop_id, destination.stop_id, directions, mode)
+                return directions
         if isinstance(origin, BusStop):
             origin = origin.coords
         if isinstance(destination, BusStop):
             destination = destination.coords
 
-        if cache and isinstance(origin, BusStop) and isinstance(destination, BusStop):
-            c = Cache()
-
-            data = c.get_cache(origin.stop_id, destination.stop_id, mode)
-
-            if data is False:
-                directions = self.client.directions(
-                    origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
-                    waypoints=waypoints)
-                c.cache(origin.stop_id, destination.stop_id, directions, mode)
-                return directions
-            return data
-        else:
-            directions = self.client.directions(
-                origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
-                waypoints=waypoints)
-            return directions
+        directions = self.client.directions(
+            origin, destination, mode=mode, avoid=avoid, traffic_model=traffic,
+            waypoints=waypoints)
+        return directions
 
     def get_distance(self, origin, destination):
         directions = self.direction(origin, destination)

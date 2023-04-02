@@ -30,7 +30,7 @@ class Node:
             return None
 
     def get_cost(self):
-        if self.parent:
+        if self.parent and self.directions:
             cost = get_distance_value(self.directions)
             current_node = self.parent
         else:
@@ -41,7 +41,7 @@ class Node:
         return cost
 
     def get_duration(self):
-        if self.parent:
+        if self.parent and self.directions:
             duration = get_duration_value(self.directions)
             duration += self.parent.duration
             return duration
@@ -55,6 +55,7 @@ class Node:
 
     def get_bus_stop_duration_to(self, origin):
         return self.duration - origin.duration
+
 
 
 def get_directions_of_node(goal_node, start_node):

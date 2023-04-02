@@ -1,15 +1,19 @@
+import os
+
 from src.Algorithms.Path import get_path, optimize_path, print_optimized_path, get_directions_of_path
 from src.Algorithms.aStarAlgo import aStar
 from src.Classes.Route import BusRoute, Route
 from src.bus_stops_init import generate_bus_stops, get_nearest_bus_stop
 from src.Classes import Route
-from src.maps_client import Directions
+from src.maps_client import Directions, Cache
 
 import time
 if __name__ == '__main__':
     start_time = time.time()
     bus_stops_dict = generate_bus_stops()
     D = Directions()
+    path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
+    path_cache = Cache(path_cache_file)
     # for trouble shooting in algo, uncomment below
     # for bus_stop in bus_stops_dict.values():
     #     print(f"{bus_stop.stop_id} neighbors : {bus_stop.neighbors}")
@@ -83,19 +87,38 @@ if __name__ == '__main__':
     start_coords = (1.461799, 103.7639603)
     end_coords = (1.4854384, 103.7628811)
 
-    start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
-    end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
+    # start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
+    # end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
+    start_bus_stop = bus_stops_dict[145]
+    end_bus_stop = bus_stops_dict[66]
 
+    # path = path_cache.get_path(start_bus_stop.stop_id, end_bus_stop.stop_id)
+    # if path:
+    #     print("path found in cache")
+    #
+    # else:
+    #     print("path not found in cache")
+    routes = []
+    node_result = aStar(start_bus_stop, end_bus_stop, bus_stops_dict)
+    path = get_path(node_result)
+    if node_result.bus_stop.stop_id == end_bus_stop.stop_id:
+        # optimize path if end bus stop is reached
+        optimized_path = optimize_path(path)
+        routes += get_directions_of_path(optimized_path)
+        walk_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
+    else:
+        # else just get directions from start to nearest bus stop possible
+        routes += get_directions_of_path([path])
+        # then to nearest bus stop possible to end
+        walk_to_end = D.client.directions(node_result.bus_stop.coords, end_coords, mode='walking')
+
+    routes.append(Route.Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, walk_to_end))
 
     start_to_bus_stop = D.client.directions(start_coords, start_bus_stop.coords,mode='walking')
     routes = [Route.Route("start name", start_bus_stop.name, start_coords, start_bus_stop.coords, start_to_bus_stop)]
 
-    path = get_path(aStar(start_bus_stop, end_bus_stop, bus_stops_dict))
-
-    # optional optimize path below
-    optimized_path = optimize_path(path)
     # print_optimized_path(optimized_path)
-    routes += get_directions_of_path(optimized_path)
+    routes += get_directions_of_path([path])
     bus_stop_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
     routes.append(Route.Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, bus_stop_to_end))
 

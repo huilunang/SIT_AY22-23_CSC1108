@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request
 import requests
 import json
@@ -9,12 +11,14 @@ from src.Classes.Route import BusRoute, Route
 from src.Algorithms.Path import get_path, optimize_path, get_directions_of_path
 from src.Algorithms.aStarAlgo import aStar
 from src.bus_stops_init import generate_bus_stops, get_nearest_bus_stop
-from src.maps_client import Directions
+from src.maps_client import Directions, Cache
 
 app = Flask(__name__)
 
 bus_stops_dict = generate_bus_stops()
 D = Directions()
+path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
+path_cache = Cache(path_cache_file)
 
 
 # api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
@@ -67,16 +71,33 @@ def generate_map():
             start_to_bus_stop = D.client.directions(start_coords, start_bus_stop.coords, mode='walking')
             routes = [
                 Route("start name", start_bus_stop.name, start_coords, start_bus_stop.coords, start_to_bus_stop)]
+            path = path_cache.get_path(start_bus_stop.stop_id, end_bus_stop.stop_id)
+            if not path:
+                node_result = aStar(start_bus_stop, end_bus_stop, bus_stops_dict)
 
-            path = get_path(aStar(start_bus_stop, end_bus_stop, bus_stops_dict))
+                path = get_path(node_result)
+                if node_result.bus_stop.stop_id == end_bus_stop.stop_id:
+                    # optimize path if end bus stop is reached
+                    optimized_path = optimize_path(path)
+                    routes += get_directions_of_path(optimized_path)
+                else:
+                    #store path in cache
+                    path_cache.cache_path(start_bus_stop.stop_id, end_bus_stop.stop_id, path)
 
-            # optional optimize path below
-            optimized_path = optimize_path(path)
-            # print_optimized_path(optimized_path)
-            routes += get_directions_of_path(optimized_path)
-            bus_stop_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
-            routes.append(Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, bus_stop_to_end))
+                    # get directions from start to nearest bus stop possible
+                    routes += get_directions_of_path([path])
+                    # end bus stop is now the furthest i can get to
+                    end_bus_stop.coords = node_result.bus_stop.coords
 
+            else:
+                print("path is in cache!")
+                # if path is in cache, get directions from start to end
+                routes += get_directions_of_path([path])
+
+            walk_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
+            routes.append(Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, walk_to_end))
+
+            counter = 1
             for r in routes:
                 route = r
                 polyline_list = route.polyline_points
@@ -87,16 +108,16 @@ def generate_map():
                     for coords in coords_list:
                         gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="#ff6666",
                                   edge_width=9, edge_alpha=0.7)
-                    gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan")
-                    gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
+                    gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label = str(counter))
+                    # gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
 
                 else:
                     for coords in coords_list:
                         gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="green",
                                   edge_width=5, edge_alpha=1.0)
-                    gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan")
-                    gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
-
+                    gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label = str(counter))
+                    # gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
+                counter += 1
             # create html elements to insert into html template
             map_html = gmap.get()
             html_finder = BeautifulSoup(map_html, 'html.parser')

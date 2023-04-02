@@ -1,6 +1,8 @@
+import os
+
 from src.Classes.Node import get_directions_of_node, get_bus_stop_list
 from src.Classes.Route import BusRoute, Route
-from src.maps_client import Directions
+from src.maps_client import Directions, Cache
 
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300  # 5 minutes
@@ -25,8 +27,11 @@ def get_path(node):
 
 
 def optimize_path(path):
+    path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
+    path_cache = Cache(path_cache_file)
     optimized_path = []
     original_path = path.copy()
+
     # no do-while loop in python, so use while loop with a flag
     found_better_path = True
 
@@ -51,7 +56,6 @@ def optimize_path(path):
                         # set flag to true, so that the loop
                         # will run again to maybe find a better path
                         found_better_path = True
-
                         # if the path has already been optimized at least once,
                         # remove the last index as it will be replaced with the new optimized path
                         if len(optimized_path) != 0:
@@ -74,8 +78,11 @@ def optimize_path(path):
                         break
 
     if len(optimized_path) == 0:  # if nothing was optimized, return original path
+        for i in range(len(original_path) - 1): # cache all paths for future use
+            path_cache.cache_path(original_path[i].bus_stop.stop_id, original_path[-1].bus_stop.stop_id, [original_path])
         return [original_path]
     else:
+        path_cache.cache_path(optimized_path[0][0].bus_stop.stop_id, optimized_path[-1][-1].bus_stop.stop_id, optimized_path)
         return optimized_path
 
 
@@ -191,8 +198,14 @@ def get_bus_service_path(path):
             prev_shared = shared
             if i < len(busses) - 1:
                 shared = shared.intersection(busses[i])
-
         bus_changes += 1
+        if i == 0 and len(prev_shared) == 0:
+            print(busses)
+            for bus in busses[i]:
+                bus_path[bus_changes] = {bus: 1}
+                break
+            i += 1
+
         for stop in prev_shared:
             bus_path[bus_changes] = {stop: number_of_stops}
     return bus_path
