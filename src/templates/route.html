@@ -102,6 +102,17 @@
       #show_directions:hover {
         background-color: #3e8e41;
       }
+      #error_div{
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 5px;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        font-weight: bold;
+        max-width: 200px;
+        text-align: center;
+        margin: auto;
+      }
     </style>
     <script>
       function toggleDirections() {
@@ -118,11 +129,17 @@
     <div id="floating-panel">
       <form id="inputs" action="/" method="post">
         <label for="origin-input">Start:</label>
-        <input type="text" id="origin-input" name="origin-input">
+        <input type="text" id="origin-input" name="origin-input" required>
         <br>
         <label for="destination-input">Destination:</label>
-        <input type="text" id="destination-input" name="destination-input">
+        <input type="text" id="destination-input" name="destination-input" required>
         <br>
+        {% if error_msg %}
+        <div id="error_div">
+          {{ error_msg|safe }}
+        </div>
+        <br>
+        {% endif %}
       <button id="submit-btn">GO    <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
       </form>
       <br>

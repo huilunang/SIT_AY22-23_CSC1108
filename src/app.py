@@ -17,6 +17,7 @@ D = Directions()
 path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
 path_cache = Cache(path_cache_file)
 
+
 # api_key = 'AIzaSyAYBRydi0PALfdOOPkdIjFQuiBM9uKTPTI'
 
 @app.route("/", methods=["GET", "POST"])
@@ -44,8 +45,20 @@ def generate_map():
                 gmap.marker(float(origin[0]), float(origin[1]), color="green", label="S")
             except IndexError:
 
-                pass
                 # TODO : @KY : handle error
+                error_msg = "Please enter a valid geocode or coordinate"
+                gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key, zoom=13)
+                map_html = gmap.get()
+                html_finder = BeautifulSoup(map_html, 'html.parser')
+                map_script = html_finder.find_all('script')
+
+                # html elements to parse
+                map_script_1 = map_script[0]  # google api script
+                map_script_2 = map_script[1]  # map initialization script
+                map_div_1 = '<div id="map_canvas"></div>'  # map body div
+
+                return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
+                                       map_script_2=map_script_2, error_msg=error_msg)
 
         if ',' in destination:
             destination_list = destination.split(",")
@@ -56,8 +69,21 @@ def generate_map():
                 destination = gmplot.GoogleMapPlotter.geocode(destination, apikey=api_key)
                 gmap.marker(float(destination[0]), float(destination[1]), color="red", label="D")
             except IndexError:
-                pass
+
                 # TODO : @KY : handle error
+                error_msg = "Please enter a valid geocode or coordinate"
+                gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key, zoom=13)
+                map_html = gmap.get()
+                html_finder = BeautifulSoup(map_html, 'html.parser')
+                map_script = html_finder.find_all('script')
+
+                # html elements to parse
+                map_script_1 = map_script[0]  # google api script
+                map_script_2 = map_script[1]  # map initialization script
+                map_div_1 = '<div id="map_canvas"></div>'  # map body div
+
+                return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
+                                       map_script_2=map_script_2, error_msg=error_msg)
 
         # extract the polyline points and decode them into latitude/longitude coordinates
 
@@ -67,7 +93,7 @@ def generate_map():
         start_to_destination = D.direction(start_coords, end_coords, cache=False, mode="walking")
         walk_distance = get_walking_distance_from_directions(start_to_destination)
         walk_duration = get_walking_duration(start_to_destination) / 60
-        if walk_distance <= 500: #if destination is within 500m, just walk there
+        if walk_distance <= 500:  # if destination is within 500m, just walk there
             routes = [Route(origin_str, destination_str, start_coords, end_coords, start_to_destination)]
         else:
             start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
@@ -86,7 +112,7 @@ def generate_map():
                     optimized_path = optimize_path(path)
                     routes += get_directions_of_path(optimized_path)
                 else:
-                    #store path in cache
+                    # store path in cache
                     path_cache.cache_path(start_bus_stop.stop_id, end_bus_stop.stop_id, [path])
 
                     # get directions from start to nearest bus stop possible
@@ -102,14 +128,13 @@ def generate_map():
             walk_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
             routes.append(Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, walk_to_end))
 
-
             total_duration = 0
             for route in routes:
                 total_duration += route.duration
             print("total duration: ", total_duration)
             print("walk duration: ", walk_duration)
 
-            if walk_duration <= total_duration / 2: # if i save half the time by walking, just walk
+            if walk_duration <= total_duration / 2:  # if i save half the time by walking, just walk
                 routes = [Route(origin_str, destination_str, start_coords, end_coords, start_to_destination)]
 
         counter = 1
@@ -123,14 +148,14 @@ def generate_map():
                 for coords in coords_list:
                     gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="#ff6666",
                               edge_width=9, edge_alpha=0.7)
-                gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label = str(counter))
+                gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label=str(counter))
                 # gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
 
             else:
                 for coords in coords_list:
                     gmap.plot([coord[0] for coord in coords], [coord[1] for coord in coords], color="green",
                               edge_width=5, edge_alpha=1.0)
-                gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label = str(counter))
+                gmap.marker(coords_list[0][0][0], coords_list[0][0][1], color="cyan", label=str(counter))
                 # gmap.marker(coords_list[-1][-1][0], coords_list[-1][-1][1], color="cyan")
             counter += 1
         # create html elements to insert into html template
@@ -158,7 +183,6 @@ def generate_map():
 
     # render the template with the empty form and default map
     gmap = gmplot.GoogleMapPlotter.from_geocode('Johor Bahru, Malaysia', apikey=api_key, zoom=13)
-    # TODO: add drop pin to get fill start location
     map_html = gmap.get()
     html_finder = BeautifulSoup(map_html, 'html.parser')
     map_script = html_finder.find_all('script')
@@ -168,8 +192,7 @@ def generate_map():
     map_script_2 = map_script[1]  # map initialization script
     map_div_1 = '<div id="map_canvas"></div>'  # map body div
 
-    return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1,
-                           map_script_2=map_script_2, origin=origin, destination=destination)
+    return render_template("route.html", map_div_1=map_div_1, map_script_1=map_script_1, map_script_2=map_script_2)
 
 
 if __name__ == "__main__":

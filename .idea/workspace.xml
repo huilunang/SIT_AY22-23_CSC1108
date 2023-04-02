@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="39ed43ea-f7ad-48b6-8a92-47144bf1f70b" name="Changes" comment="DONE:&#10;- will now walk if origin is less than 500m away from destination!!!&#10;- will now prefer to walk if walking saves 50% or more time compared to bus!!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/cache.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/cache/cache.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/path_cache.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/cache/path_cache.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/route.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/route.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
