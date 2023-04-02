@@ -8,7 +8,7 @@ from src.Classes.Route import BusRoute, Route
 from src.Algorithms.Path import get_path, optimize_path, get_directions_of_path
 from src.Algorithms.aStarAlgo import aStar
 from src.bus_stops_init import generate_bus_stops, get_nearest_bus_stop
-from src.maps_client import Directions, Cache
+from src.maps_client import Directions, Cache, get_walking_distance_from_directions, get_walking_duration
 
 app = Flask(__name__)
 
@@ -55,37 +55,53 @@ def generate_map():
         start_coords = origin
         end_coords = destination
 
-        start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
-        end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
-
-        start_to_bus_stop = D.client.directions(start_coords, start_bus_stop.coords, mode='walking')
-        routes = [
-            Route("start name", start_bus_stop.name, start_coords, start_bus_stop.coords, start_to_bus_stop)]
-        path = path_cache.get_path(start_bus_stop.stop_id, end_bus_stop.stop_id)
-        if not path:
-            node_result = aStar(start_bus_stop, end_bus_stop, bus_stops_dict)
-
-            path = get_path(node_result)
-            if node_result.bus_stop.stop_id == end_bus_stop.stop_id:
-                # optimize path if end bus stop is reached
-                optimized_path = optimize_path(path)
-                routes += get_directions_of_path(optimized_path)
-            else:
-                #store path in cache
-                path_cache.cache_path(start_bus_stop.stop_id, end_bus_stop.stop_id, path)
-
-                # get directions from start to nearest bus stop possible
-                routes += get_directions_of_path([path])
-                # end bus stop is now the furthest i can get to
-                end_bus_stop.coords = node_result.bus_stop.coords
-
+        start_to_destination = D.direction(start_coords, end_coords, cache=False, mode="walking")
+        walk_distance = get_walking_distance_from_directions(start_to_destination)
+        walk_duration = get_walking_duration(start_to_destination) / 60
+        if walk_distance <= 500: #if destination is within 500m, just walk there
+            routes = [Route(origin_str, destination_str, start_coords, end_coords, start_to_destination)]
         else:
-            print("path is in cache!")
-            # if path is in cache, get directions from start to end
-            routes += get_directions_of_path([path])
+            start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
+            end_bus_stop = get_nearest_bus_stop(end_coords, bus_stops_dict)
 
-        walk_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
-        routes.append(Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, walk_to_end))
+            start_to_bus_stop = D.direction(start_coords, start_bus_stop.coords, mode='walking', cache=False)
+            routes = [
+                Route("start name", start_bus_stop.name, start_coords, start_bus_stop.coords, start_to_bus_stop)]
+            path = path_cache.get_path(start_bus_stop.stop_id, end_bus_stop.stop_id)
+            if not path:
+                node_result = aStar(start_bus_stop, end_bus_stop, bus_stops_dict)
+
+                path = get_path(node_result)
+                if node_result.bus_stop.stop_id == end_bus_stop.stop_id:
+                    # optimize path if end bus stop is reached
+                    optimized_path = optimize_path(path)
+                    routes += get_directions_of_path(optimized_path)
+                else:
+                    #store path in cache
+                    path_cache.cache_path(start_bus_stop.stop_id, end_bus_stop.stop_id, [path])
+
+                    # get directions from start to nearest bus stop possible
+                    routes += get_directions_of_path([path])
+                    # end bus stop is now the furthest i can get to
+                    end_bus_stop.coords = node_result.bus_stop.coords
+
+            else:
+                print("path is in cache!")
+                # if path is in cache, get directions from start to end
+                routes += get_directions_of_path(path)
+
+            walk_to_end = D.client.directions(end_bus_stop.coords, end_coords, mode='walking')
+            routes.append(Route(end_bus_stop.name, "end name", end_bus_stop.coords, end_coords, walk_to_end))
+
+
+            total_duration = 0
+            for route in routes:
+                total_duration += route.duration
+            print("total duration: ", total_duration)
+            print("walk duration: ", walk_duration)
+
+            if walk_duration <= total_duration / 2: # if i save half the time by walking, just walk
+                routes = [Route(origin_str, destination_str, start_coords, end_coords, start_to_destination)]
 
         counter = 1
         for r in routes:

@@ -42,6 +42,7 @@ for j in range(len(bus_stops_dict)-1, 0, -1):
             else:
                 print("path is in cache!")
             print(f"Time taken for pair {pair_count}: {time.time() - pair_st}")
+            print(f"Total time so far: {time.time() - st}")
 
 
 print(f"Total time taken: {time.time() - st}")

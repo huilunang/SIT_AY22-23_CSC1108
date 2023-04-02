@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39ed43ea-f7ad-48b6-8a92-47144bf1f70b" name="Changes" comment="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol" />
+    <list default="true" id="39ed43ea-f7ad-48b6-8a92-47144bf1f70b" name="Changes" comment="DONE:&#10;- removed useless directions call in app.py">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/cache.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/cache/cache.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/path_cache.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/cache/path_cache.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preload_cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preload_cache.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680401085931</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="DONE:&#10;- removed useless directions call in app.py">
+      <created>1680401456632</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680401456632</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -114,6 +127,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="DONE:&#10;- HTML markers now show numbers that match the steps!&#10;- Caching : we now cache paths so that repeated requests for same start and end busstops are instant!&#10;- now when a solution cant be found, instead of crashing, it will show a bus route to get as close to destination as possible, then will tell user to walk the rest of the way lol" />
+    <MESSAGE value="DONE:&#10;- removed useless directions call in app.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="DONE:&#10;- removed useless directions call in app.py" />
   </component>
 </project>
