@@ -1,6 +1,8 @@
-from Classes.Node import get_directions_of_node, get_bus_stop_list
-from Classes.Route import BusRoute, Route
-from maps_client import Directions
+import os
+
+from src.Classes.Node import get_directions_of_node, get_bus_stop_list
+from src.Classes.Route import BusRoute, Route
+from src.maps_client import Directions, Cache
 
 MINIMUM_BUS_STOPS_SAVED = 5
 MAX_WALKING_DURATION = 300  # 5 minutes
@@ -25,8 +27,11 @@ def get_path(node):
 
 
 def optimize_path(path):
+    path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
+    path_cache = Cache(path_cache_file)
     optimized_path = []
     original_path = path.copy()
+
     # no do-while loop in python, so use while loop with a flag
     found_better_path = True
 
@@ -34,7 +39,7 @@ def optimize_path(path):
     while found_better_path:
         # reset flag
         found_better_path = False
-        for i in range(0, len(path) - 1): #i = first bus stop
+        for i in range(0, len(path) - 1): # i = first bus stop
 
             # if a better path has already been found previously,
             # need to restart the loop since optimized_path is now changed
@@ -51,8 +56,6 @@ def optimize_path(path):
                         # set flag to true, so that the loop
                         # will run again to maybe find a better path
                         found_better_path = True
-
-
                         # if the path has already been optimized at least once,
                         # remove the last index as it will be replaced with the new optimized path
                         if len(optimized_path) != 0:
@@ -72,12 +75,14 @@ def optimize_path(path):
                         #     path_no += 1
                         #     print("->".join([str(node.bus_stop.stop_id) for node in path]))
 
-
                         break
 
-    if len(optimized_path) == 0: # if nothing was optimized, return original path
+    if len(optimized_path) == 0:  # if nothing was optimized, return original path
+        for i in range(len(original_path) - 1): # cache all paths for future use
+            path_cache.cache_path(original_path[i].bus_stop.stop_id, original_path[-1].bus_stop.stop_id, [original_path])
         return [original_path]
     else:
+        path_cache.cache_path(optimized_path[0][0].bus_stop.stop_id, optimized_path[-1][-1].bus_stop.stop_id, optimized_path)
         return optimized_path
 
 
@@ -99,11 +104,13 @@ def printPath(path):
     # print(" | ".join(stop_ids_str))
     # print("Total stops: " + str(len(stop_ids) - 1))
 
+
 def print_optimized_path(optimized_path):
-    travel_type = BUS # 0 = bus, 1 = walk
+    travel_type = BUS  # 0 = bus, 1 = walk
     # if first step in optimized path only has 1 item,
     # it means that the first step is walking (no busses to take in first step)
     if len(optimized_path[0]) == 1:
+        optimized_path.pop(0)
         travel_type = WALK
 
     # if last step in optimized path had 0 items,
@@ -118,14 +125,14 @@ def print_optimized_path(optimized_path):
             bus_path = get_bus_service_path(path)
             current_bus_stop = 0
             for bus in bus_path:
-                for i, j in bus_path[bus].items():
+                for bus_svc, number_of_stops in bus_path[bus].items():
                     print(
-                        f"\tStep {bus} : From {path[current_bus_stop].bus_stop.name}, take bus service {i} for {j} stops, alight at {path[current_bus_stop + j].bus_stop.name}")
-                    current_bus_stop += j
-        else: #if travel_type = WALK
+                        f"\tStep {bus} : From {path[current_bus_stop].bus_stop.name}, take bus service {bus_svc} for {number_of_stops} stops, alight at {path[current_bus_stop + number_of_stops].bus_stop.name}")
+                    current_bus_stop += number_of_stops
+        else:  # if travel_type = WALK
             print(f"Step {step_number}: Walk: ")
             print(f"\tFrom {path[0].bus_stop.name}, walk to {path[-1].bus_stop.name}")
-        travel_type = (travel_type + 1) % 2 # invert travel type
+        travel_type = (travel_type + 1) % 2  # invert travel type
         step_number += 1
 
 
@@ -148,7 +155,6 @@ def get_directions_of_path(optimized_path):
             current_bus_stop = 0
             for bus in bus_path:
                 for bus_service, number_of_stops in bus_path[bus].items():
-
                     start_node = path[current_bus_stop]
                     end_node = path[current_bus_stop + number_of_stops]
 
@@ -158,14 +164,17 @@ def get_directions_of_path(optimized_path):
                     new_bus_route = BusRoute(list_BusStops, bus_service, number_of_stops, node_directions)
                     route_list.append(new_bus_route)
                     current_bus_stop += number_of_stops
-        else: #if travel_type = WALK
+        else:  # if travel_type = WALK
+            start_name = path[0].bus_stop.name
+            end_name = path[-1].bus_stop.name
             start_coords = path[0].bus_stop.coords
             end_coords = path[-1].bus_stop.coords
-            walk_directions = D.direction(path[0].bus_stop, path[-1].bus_stop)
-            new_walk_route = Route(start_coords, end_coords, walk_directions)
+
+            walk_directions = D.direction(path[0].bus_stop, path[-1].bus_stop, mode="walking")
+            new_walk_route = Route(start_name, end_name, start_coords, end_coords, walk_directions)
             route_list.append(new_walk_route)
 
-        travel_type = (travel_type + 1) % 2 # invert travel type
+        travel_type = (travel_type + 1) % 2  # invert travel type
     return route_list
 
 
@@ -189,8 +198,14 @@ def get_bus_service_path(path):
             prev_shared = shared
             if i < len(busses) - 1:
                 shared = shared.intersection(busses[i])
-
         bus_changes += 1
+        if i == 0 and len(prev_shared) == 0:
+            print(busses)
+            for bus in busses[i]:
+                bus_path[bus_changes] = {bus: 1}
+                break
+            i += 1
+
         for stop in prev_shared:
             bus_path[bus_changes] = {stop: number_of_stops}
     return bus_path
