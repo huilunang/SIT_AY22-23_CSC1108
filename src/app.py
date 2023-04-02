@@ -12,6 +12,7 @@ from src.maps_client import Directions, Cache, get_walking_distance_from_directi
 
 app = Flask(__name__)
 
+WALKABLE_DISTANCE = 500 # in meters
 bus_stops_dict = generate_bus_stops()
 D = Directions()
 path_cache_file = os.path.join("..\\cache", "path_cache.pickle")
@@ -90,8 +91,8 @@ def generate_map():
 
         start_to_destination = D.direction(start_coords, end_coords, cache=False, mode="walking")
         walk_distance = get_walking_distance_from_directions(start_to_destination)
-        walk_duration = get_walking_duration(start_to_destination) / 60
-        if walk_distance <= 500:  # if destination is within 500m, just walk there
+        walk_duration = get_walking_duration(start_to_destination) / 60 # in minutes
+        if walk_distance <= WALKABLE_DISTANCE:  # if destination is within 500m, just walk there
             routes = [Route(origin_str, destination_str, start_coords, end_coords, start_to_destination)]
         else:
             start_bus_stop = get_nearest_bus_stop(start_coords, bus_stops_dict)
